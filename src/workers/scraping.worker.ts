@@ -1,7 +1,10 @@
 import { Job } from "bullmq";
-// You can run puppeteer/playwright here in a dedicated container
+import { crawlAndStore } from "../services/scraping/index.js";
+
 export default async function (job: Job<{ source?: string; url?: string }>) {
-// scrape and write to jobs collection
-return { ok: true };
+const { source, url } = job.data || {};
+if (!source || !url) return { ok: false, reason: "Missing source or url" };
+const res = await crawlAndStore(source, url);
+return { ok: true, ...res };
 }
 

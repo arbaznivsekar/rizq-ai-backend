@@ -23,19 +23,15 @@ defaultHeaders: {
 return client;
 }
 
-export async function createChatCompletion(
-system: string,
-user: string,
-options?: { model?: string; temperature?: number }
-) {
+export async function createChatCompletion(system: string, user: string) {
 const ai = getAIClient();
 const resp = await ai.chat.completions.create({
-model: options?.model || "deepseek/deepseek-chat",
+model: "deepseek/deepseek-chat",
 messages: [
 { role: "system", content: system },
 { role: "user", content: user },
 ],
-temperature: options?.temperature ?? 0.3,
+temperature: 0.3,
 });
 return resp.choices?.[0]?.message?.content ?? "";
 }
