@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-08-24T11:45:04.361Z",
+  "searchQuery": "data scientist",
+  "location": "remote",
+  "type": "success",
+  "totalJobs": 1,
+  "jobs": [
+    {
+      "title": "Upload your resume",
+      "company": "Unknown Company",
+      "location": "Unknown Location",
+      "salary": "Not specified",
+      "link": "https://www.indeed.com/promo/resume"
+    }
+  ]
+}

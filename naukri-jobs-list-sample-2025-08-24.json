@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-08-24T11:57:24.901Z",
+  "source": "naukri.com",
+  "searchQuery": "list",
+  "location": "Mumbai",
+  "type": "sample",
+  "totalJobs": 1,
+  "jobs": [
+    {
+      "title": "Sample list position",
+      "company": "Sample Company",
+      "location": "Sample Location",
+      "salary": "Sample Salary",
+      "experience": "Sample Experience",
+      "link": "https://naukri.com/sample-job",
+      "source": "naukri.com"
+    }
+  ]
+}

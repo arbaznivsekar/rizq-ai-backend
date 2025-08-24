@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-08-24T12:32:23.317Z",
+  "source": "naukri.com",
+  "searchQuery": "software engineer",
+  "location": "Mumbai",
+  "totalJobs": 5,
+  "note": "These are REAL jobs scraped from Naukri.com - No fake data!",
+  "jobs": [
+    {
+      "title": "Software Engineer",
+      "company": "Morningstar",
+      "location": "Hybrid - Navi Mumbai, Thane, Mumbai (All Areas)",
+      "salary": "Not specified",
+      "experience": "3-5 Yrs",
+      "link": "https://www.naukri.com/job-listings-software-engineer-morningstar-thane-navi-mumbai-mumbai-all-areas-3-to-5-years-240825004098",
+      "extractedAt": "2025-08-24T12:32:23.309Z"
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Ltimindtree",
+      "location": "Mumbai (All Areas), Bengaluru",
+      "salary": "Not specified",
+      "experience": "3-5 Yrs",
+      "link": "https://www.naukri.com/job-listings-software-engineer-ltimindtree-bengaluru-mumbai-all-areas-3-to-5-years-180825002262",
+      "extractedAt": "2025-08-24T12:32:23.309Z"
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Indus Valley Partners",
+      "location": "Mumbai",
+      "salary": "Not specified",
+      "experience": "2-7 Yrs",
+      "link": "https://www.naukri.com/job-listings-software-engineer-indus-valley-partners-mumbai-2-to-7-years-180825503452",
+      "extractedAt": "2025-08-24T12:32:23.309Z"
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Metal Power Analytical",
+      "location": "Mumbai",
+      "salary": "Not specified",
+      "experience": "3-7 Yrs",
+      "link": "https://www.naukri.com/job-listings-software-engineer-metal-power-analytical-mumbai-3-to-7-years-210825011593",
+      "extractedAt": "2025-08-24T12:32:23.309Z"
+    },
+    {
+      "title": "React Software Engineer",
+      "company": "Volosphere Technologies LLP, Mumbai",
+      "location": "Remote",
+      "salary": "Not specified",
+      "experience": "6-10 Yrs",
+      "link": "https://www.naukri.com/job-listings-react-software-engineer-volosphere-technologies-llp-mumbai-mumbai-all-areas-6-to-10-years-180825006013",
+      "extractedAt": "2025-08-24T12:32:23.309Z"
+    }
+  ]
+}

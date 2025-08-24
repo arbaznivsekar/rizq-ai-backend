@@ -1,0 +1,392 @@
+{
+  "info": {
+    "name": "RIZQ.AI - Authentication Testing",
+    "_postman_id": "auth-testing-1234-5678-9abc-def0",
+    "description": "Complete Postman collection for testing RIZQ.AI authentication endpoints including login, register, logout, and protected routes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "auth_token", "value": "" },
+    { "key": "user_email", "value": "test@example.com" },
+    { "key": "user_password", "value": "password123" },
+    { "key": "user_name", "value": "Test User" }
+  ],
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "1. User Registration",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{user_password}}\",\n  \"name\": \"{{user_name}}\",\n  \"phone\": \"+1-555-0123\",\n  \"roles\": [\"user\"]\n}"
+            },
+            "description": "Register a new user account. This endpoint will create a new user and return a JWT token."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Save the auth token for future requests",
+                  "if (pm.response.code === 201) {",
+                  "  const response = pm.response.json();",
+                  "  if (response && response.token) {",
+                  "    pm.collectionVariables.set('auth_token', response.token);",
+                  "    console.log('✅ Registration successful! Token saved.');",
+                  "    console.log('User ID:', response.user.id);",
+                  "    console.log('User Email:', response.user.email);",
+                  "  }",
+                  "} else {",
+                  "  console.log('❌ Registration failed:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. User Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{user_password}}\"\n}"
+            },
+            "description": "Login with existing user credentials. Returns a JWT token for authentication."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Save the auth token for future requests",
+                  "if (pm.response.code === 200) {",
+                  "  const response = pm.response.json();",
+                  "  if (response && response.token) {",
+                  "    pm.collectionVariables.set('auth_token', response.token);",
+                  "    console.log('✅ Login successful! Token saved.');",
+                  "    console.log('User ID:', response.user.id);",
+                  "    console.log('User Email:', response.user.email);",
+                  "  }",
+                  "} else {",
+                  "  console.log('❌ Login failed:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Get Current User (Protected)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "me"]
+            },
+            "description": "Get current user information. This endpoint requires authentication (JWT token)."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const response = pm.response.json();",
+                  "  console.log('✅ User info retrieved successfully!');",
+                  "  console.log('User:', JSON.stringify(response.user, null, 2));",
+                  "} else {",
+                  "  console.log('❌ Failed to get user info:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "4. User Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "logout"]
+            },
+            "description": "Logout the current user. In a real app, this might blacklist the token."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  console.log('✅ Logout successful!');",
+                  "  // Clear the token",
+                  "  pm.collectionVariables.set('auth_token', '');",
+                  "} else {",
+                  "  console.log('❌ Logout failed:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "🔒 Protected Endpoints Testing",
+      "item": [
+        {
+          "name": "5. Test Scraping Health (Protected)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "health"]
+            },
+            "description": "Test if the scraping health endpoint works with authentication. This requires admin role."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  console.log('✅ Scraping health check successful!');",
+                  "  const response = pm.response.json();",
+                  "  console.log('Health status:', response.health);",
+                  "} else if (pm.response.code === 403) {",
+                  "  console.log('⚠️ Access denied - user needs admin role');",
+                  "} else {",
+                  "  console.log('❌ Failed to check scraping health:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "6. Test Scraping Stats (Protected)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "stats"]
+            },
+            "description": "Test if the scraping stats endpoint works with authentication. This requires admin role."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  console.log('✅ Scraping stats retrieved successfully!');",
+                  "  const response = pm.response.json();",
+                  "  console.log('Stats:', JSON.stringify(response.stats, null, 2));",
+                  "} else if (pm.response.code === 403) {",
+                  "  console.log('⚠️ Access denied - user needs admin role');",
+                  "} else {",
+                  "  console.log('❌ Failed to get scraping stats:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Test Jobs Endpoint (Protected)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/jobs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "jobs"]
+            },
+            "description": "Test if the jobs endpoint works with authentication. This requires user role."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  console.log('✅ Jobs retrieved successfully!');",
+                  "  const response = pm.response.json();",
+                  "  console.log('Total jobs:', response.total);",
+                  "  console.log('Jobs found:', response.items.length);",
+                  "} else {",
+                  "  console.log('❌ Failed to get jobs:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "🧪 Error Testing",
+      "item": [
+        {
+          "name": "8. Test Login with Invalid Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"invalid-email\",\n  \"password\": \"password123\"\n}"
+            },
+            "description": "Test validation error handling with invalid email format."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 400) {",
+                  "  console.log('✅ Validation error handled correctly');",
+                  "  const response = pm.response.json();",
+                  "  console.log('Error details:', response.details);",
+                  "} else {",
+                  "  console.log('❌ Expected validation error, got:', pm.response.code);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "9. Test Protected Endpoint Without Token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "me"]
+            },
+            "description": "Test access to protected endpoint without authentication token."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 401) {",
+                  "  console.log('✅ Unauthorized access properly blocked');",
+                  "} else {",
+                  "  console.log('❌ Expected 401 error, got:', pm.response.code);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "10. Test Protected Endpoint with Invalid Token",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer invalid-token-here", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "me"]
+            },
+            "description": "Test access to protected endpoint with invalid authentication token."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 401) {",
+                  "  console.log('✅ Invalid token properly rejected');",
+                  "} else {",
+                  "  console.log('❌ Expected 401 error, got:', pm.response.code);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "📋 Test Instructions",
+      "item": [
+        {
+          "name": "How to Use This Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "This is just a placeholder. Read the description below for testing instructions."
+          }
+        }
+      ]
+    }
+  ]
+}
