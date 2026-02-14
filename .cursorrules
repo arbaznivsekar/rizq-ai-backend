@@ -1,0 +1,65 @@
+# RIZQ.AI Backend - Enterprise Scraping Architecture Rules
+
+## Code Quality Standards
+- Use TypeScript strict mode with comprehensive type definitions
+- Follow ESLint rules and Prettier formatting
+- Implement comprehensive error handling with custom error classes
+- Use async/await patterns consistently
+- Include JSDoc documentation for all public methods
+- Implement proper logging with structured data
+
+## Architecture Patterns
+- Follow SOLID principles and dependency injection
+- Use abstract classes for common scraper functionality
+- Implement factory pattern for scraper instantiation
+- Use strategy pattern for different anti-bot techniques
+- Implement observer pattern for scraping events
+- Use repository pattern for data access
+
+## Compliance & Legal Requirements
+- GDPR/CCPA compliance by design
+- Respect robots.txt and rate limiting
+- Implement data anonymization and encryption
+- Maintain audit trails for all scraping activities
+- Monitor terms of service changes
+- Implement graceful degradation for blocked requests
+
+## Security & Anti-Detection
+- Rotate user agents and browser fingerprints
+- Implement residential proxy rotation
+- Use human-like behavior simulation
+- Implement CAPTCHA solving integration
+- Monitor and adapt to anti-bot measures
+- Implement session persistence and cookie management
+
+## Performance & Scalability
+- Use Redis for job queuing and caching
+- Implement connection pooling for databases
+- Use streaming for large data processing
+- Implement circuit breakers for external services
+- Use worker pools for parallel processing
+- Implement graceful shutdown and recovery
+
+## Testing Standards
+- Unit tests for all business logic
+- Integration tests for scraper components
+- Mock external services in tests
+- Test error handling and edge cases
+- Implement performance benchmarks
+- Use fixtures for consistent test data
+
+## Error Handling
+- Custom error classes for different failure types
+- Implement retry mechanisms with exponential backoff
+- Log errors with structured context
+- Implement circuit breakers for failing services
+- Graceful degradation for non-critical failures
+- Alert on critical system failures
+
+## Monitoring & Observability
+- Implement comprehensive logging
+- Use metrics for performance monitoring
+- Implement health checks for all components
+- Monitor scraping success rates and quality
+- Track proxy health and rotation
+- Implement alerting for system issues

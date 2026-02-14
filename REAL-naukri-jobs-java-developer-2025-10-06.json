@@ -1,0 +1,282 @@
+{
+  "timestamp": "2025-10-06T12:15:50.056Z",
+  "source": "naukri.com",
+  "searchQuery": "java developer",
+  "location": "Mumbai",
+  "totalJobs": 10,
+  "note": "These are REAL jobs scraped from Naukri.com - No fake data!",
+  "jobs": [
+    {
+      "title": "Java Developer @ Infosys -Pan India(N)",
+      "company": "Infosys",
+      "location": "Hybrid - Mumbai (All Areas), Kolkata, Delhi / NCR",
+      "salary": "Not disclosed",
+      "experience": "3-8 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-developer-infosys-pan-india-n-infosys-kolkata-delhi-ncr-mumbai-all-areas-3-to-8-years-110625024362",
+      "jobId": "110625024362",
+      "extractedAt": "2025-10-06T12:14:53.623Z",
+      "description": "Infosys Hiring Java+Springboot Developers Exciting Opportunity Awaits!\n\nWe are looking for passionate Java+Springboot Developers to join our dynamic team! If you have experience in skills Java->Springboot this is the perfect opportunity for you.\n\n\n\n\nExperience: 4 to 12 years Location: PAN INDIA Skills Required: Java+Springboot\n\nTake the next step in your career with a company that values innovation and growth! If you're interested or know someone who would be a great fit, apply now or share this opportunity.\n\n\n\n\nApply Now:\n\n#infosyshiring#javaspringboot#developers #diversityhiring\n\n\n\n\nLOCATION: PAN INDIA\n\nEXP:3 TO 10 YEARS",
+      "keySkills": [
+        "Java",
+        "Hibernate",
+        "Spring Mvc",
+        "Spring Boot",
+        "J2Ee",
+        "Microservices"
+      ],
+      "responsibilities": [
+        "Sap Security Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago",
+        "SAP MM Technical Consultant- Bangalore4-9 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Today",
+        "Sap Mm Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Developer (Fintech/Banking)",
+      "company": "Mobileware Technologies",
+      "location": "Mumbai(Andheri East)",
+      "salary": "Not disclosed",
+      "experience": "3-7 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-developer-fintech-banking-mobileware-technologies-mumbai-3-to-7-years-270825021022",
+      "jobId": "270825021022",
+      "extractedAt": "2025-10-06T12:14:53.623Z",
+      "description": "Profile Overview\n\nThe candidate will be part of a talented Mobileware software team that works on mission-critical applications. Developing our products offers a range of challenging tasks, as they combine high availability with efficient data management in the banking/payment space. As a Java expert, he/she will implement Mobilewares product strategy within the team, and hold responsibility for the high quality of new products and their expansions.\n\n\n\n\nRole and Responsibilities\n\nBackend Java developer role and responsibilities include managing Java/Java EE application development while providing expertise in the full software development lifecycle, from concept and design to testing. This includes:\n\nDelivering high availability and performance\nContributing in all phases of the Software development lifecycle (SDLC)\nWork on Java/Java EE application development\nWriting well-designed, efficient, and testable code\nConducting software analysis, programming, testing, and debugging\nEnsuring designs comply with specifications\nPreparing and producing releases of software components\nTransforming requirements into stipulations\nSupport continuous improvement\nInvestigating alternatives and technologies\nPresenting for architectural review\nPreparing End User Documentation and Training\nMaintaining an active testing environment\nLooking for code smells and optimizing code\nIdentifying other programs that could enhance current systems\n\n\n\nInformation Security Requirements\n\nAwareness and adherence to Information security guidelines, typically including but not limited to ISO 27001, PCI-DSS and SOC 2 compliance requirements\n\n\n\n\nGeneral Requirements\n\nBachelors Degree in Computer Science, Computer Applications or Electronics, or equivalent, from an institute of repute; with preference for post-graduation in relevant area\nTypically, 3 to 7 years of relevant work experience. Combination of qualification, relevant certifications, and work experience may be considered in lieu\nStrong background in Core Java with good knowledge of Collections framework, knowledge of JSP/Servlets, and proficiency in Mark-up Languages like XML and JSON\nExperience with Web frameworks - Struts/Spring, Service-Oriented Architecture / Web Services - SOAP/REST/API and proficiency with OOPS concepts\nKnowledge of Databases like MYSQL and hands-on experience in Hibernate or JPA\nExperience in J2EE application servers like Apache Tomcat\nKnowledge of jUnit test cases\nKey traits/characteristics: Analytical thinking, strong problem-solving aptitude, team player, excellent communication skills\nGood to have Skills are:\nDependency Injection (as demonstrated in Spring or Java EE through @Resource\nKnowledge of some build tool (Ant, Maven, etc.)\nKnowledge of Web Technologies - HTML, CSS, JavaScript and jQuery preferred\nExperience in banking domain is strongly preferred (UPI, IMPS, BBPS, etc)\n\n\n\nWhat is in it for you?\n\nCareer growth/recognition\nOpportunity to work with an amazing team for a product based company and exposure to the fastest growing FinTech industry\n\n\n\nAdditional Notes\n\nLocation Marol, Andheri (Mumbai)\n\n\n\n\nLevel to be determined based on demonstrated expertise, and quality of experience, during the selection process.",
+      "keySkills": [
+        "Spring",
+        "Microservices",
+        "Core Java",
+        "Digital Payment",
+        "Restful Web Api Development",
+        "Hibernate",
+        "Fintech",
+        "Spring Boot",
+        "J2Ee",
+        "JSP Servlets",
+        "MySQL",
+        "Java Development",
+        "Struts",
+        "JDBC",
+        "Web Services"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Developer",
+      "company": "KPMG Assurance and Consulting Services LLP",
+      "location": "Hybrid - Mumbai (All Areas), Bengaluru",
+      "salary": "Not disclosed",
+      "experience": "4-9 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-developer-kpmg-assurance-and-consulting-services-llp-bengaluru-mumbai-all-areas-4-to-9-years-260925022034",
+      "jobId": "260925022034",
+      "extractedAt": "2025-10-06T12:14:53.623Z",
+      "description": "Role & responsibilities\n\n\n\n\nTechnical:\n\nMinimum 3 years of experience developing scalable and distributed systems in core Java\nStrong analytical and problem-solving capability\nExcellent verbal and written communications skills\nClient facing skills: Solid experience working with clients directly, to be able to build trusted relationships with stakeholders\nAbility to collaborate effectively across global teams\nStrong understanding of data structures, algorithm, object-oriented design and design patterns\nStrong Understanding in SQL to retrieve/transform/analyze datasets\nSolid understanding and experience with agile software development lifecycle.\nExperience in the use of multi-dimensional data, data curation processes, and the measurement/improvement of data quality.\nGeneral knowledge of business processes, data flows and quantitative models that generate or consume data\nIndependent thinker, willing to engage, challenge and learn new technologies\nGood Understanding in Big data frameworks such as Spark is a plus\n\n\n\nPreferred candidate profile\n\n>> Qualification\n\nEngineering Grad / Postgraduate\n\n>> SELECTION PROCESS\n\nCandidates should expect 3 - 4 rounds of personal or telephonic interviews to assess fitment\n\n>> Compensation\n\nCompensation will be competitive according to industry standards.\n\nThe opportunity is now! If you are interested in being part of a dynamic team, serve clients across industry domains, learn the latest technologies",
+      "keySkills": [
+        "Java",
+        "Rest",
+        "Spring Boot",
+        "Microservices",
+        "SQL",
+        "Multithreading"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Developer- Pan India",
+      "company": "Infosys",
+      "location": "Mumbai (All Areas), Pune, Chennai",
+      "salary": "Not disclosed",
+      "experience": "5-10 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-developer-pan-india-infosys-pune-chennai-mumbai-all-areas-5-to-10-years-280525028546",
+      "jobId": "280525028546",
+      "extractedAt": "2025-10-06T12:14:53.623Z",
+      "description": "Skills: SRE, AWS Devops, Azure Devops\n\n\n\n\nEducation: B.TECH, B.Sc, BCA\n\n\n\n\n\nYear of Experience : 3-15 Yrs\n\n\n\n\nLocation : Pan India",
+      "keySkills": [
+        "Java",
+        "JMS",
+        "Spring Boot",
+        "Microservices",
+        "Hibernate",
+        "J2Ee"
+      ],
+      "responsibilities": [
+        "Sap Security Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago",
+        "SAP MM Technical Consultant- Bangalore4-9 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Today",
+        "Sap Mm Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Developer @ Infosys -PAN INDIA",
+      "company": "Infosys",
+      "location": "Mumbai (All Areas), Pune, Delhi / NCR",
+      "salary": "Not disclosed",
+      "experience": "3-8 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-developer-infosys-pan-india-infosys-pune-delhi-ncr-mumbai-all-areas-3-to-8-years-100625012846",
+      "jobId": "100625012846",
+      "extractedAt": "2025-10-06T12:14:53.623Z",
+      "description": "Infosys Hiring Java+Springboot Developers Exciting Opportunity Awaits!\n\nWe are looking for passionate Java+Springboot Developers to join our dynamic team! If you have experience in skills Java->Springboot this is the perfect opportunity for you.\n\n\n\n\nExperience: 4 to 12 years Location: PAN INDIA Skills Required: Java+Springboot\n\n\n\n\nTake the next step in your career with a company that values innovation and growth! If you're interested or know someone who would be a great fit, apply now or share this opportunity.\n\n\n\n\nApply Now:\n\n#infosyshiring#javaspringboot#developers #diversityhiring\n\n\n\n\nLOCATION: PAN INDIA\n\nEXP:3 TO 10 YEARS",
+      "keySkills": [
+        "Java",
+        "Hibernate",
+        "Spring Mvc",
+        "Spring Boot",
+        "J2Ee",
+        "Microservices"
+      ],
+      "responsibilities": [
+        "Sap Security Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago",
+        "SAP MM Technical Consultant- Bangalore4-9 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Today",
+        "Sap Mm Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Developer @ Infosys -Pan India",
+      "company": "Infosys",
+      "location": "Hybrid - Mumbai (All Areas), Pune, Delhi / NCR",
+      "salary": "Not disclosed",
+      "experience": "3-8 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-developer-infosys-pan-india-infosys-pune-delhi-ncr-mumbai-all-areas-3-to-8-years-100625013005",
+      "jobId": "100625013005",
+      "extractedAt": "2025-10-06T12:14:53.623Z",
+      "description": "Infosys Hiring Java+Springboot Developers Exciting Opportunity Awaits!\n\nWe are looking for passionate Java+Springboot Developers to join our dynamic team! If you have experience in skills Java->Springboot this is the perfect opportunity for you.\n\nExperience: 4 to 12 years Location: PAN INDIA Skills Required: Java+Springboot\n\nTake the next step in your career with a company that values innovation and growth! If you're interested or know someone who would be a great fit, apply now or share this opportunity.\n\nApply Now:\n\n\n\n\n#infosyshiring#javaspringboot#developers #diversityhiring\n\nLOCATION: PAN INDIA\n\nEXP:3 TO 10 YEARS",
+      "keySkills": [
+        "Java",
+        "Hibernate",
+        "Spring Boot",
+        "J2Ee",
+        "Spring",
+        "Microservices"
+      ],
+      "responsibilities": [
+        "Sap Security Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago",
+        "SAP MM Technical Consultant- Bangalore4-9 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Today",
+        "Sap Mm Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Developer & Infosys -PAN INDIA-Male",
+      "company": "Infosys",
+      "location": "Mumbai (All Areas), Pune, Delhi / NCR",
+      "salary": "Not disclosed",
+      "experience": "10-14 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-developer-infosys-pan-india-male-infosys-pune-delhi-ncr-mumbai-all-areas-10-to-14-years-140825014621",
+      "jobId": "140825014621",
+      "extractedAt": "2025-10-06T12:14:53.624Z",
+      "description": "Infosys Hiring Java+Springboot Developers Exciting Opportunity Awaits!\n\nWe are looking for passionate Java+Springboot Developers to join our dynamic team! If you have experience in skills Java->Springboot this is the perfect opportunity for you.\n\n\n\n\nExperience: 4 to 12 years Location: PAN INDIA Skills Required: Java+Springboot\n\nTake the next step in your career with a company that values innovation and growth! If you're interested or know someone who would be a great fit, apply now or share this opportunity.\n\n\n\n\nApply Now:\n\n#infosyshiring#javaspringboot#developers #diversityhiring\n\nLOCATION: PAN INDIA\n\nEXP:10 to 14 YEARS",
+      "keySkills": [
+        "Java",
+        "Hibernate",
+        "Spring Mvc",
+        "Spring Boot",
+        "J2Ee",
+        "Spring",
+        "React",
+        "Microservices",
+        "Angular"
+      ],
+      "responsibilities": [
+        "Sap Security Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago",
+        "SAP MM Technical Consultant- Bangalore4-9 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Today",
+        "Sap Mm Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Developer @ (Infosys) -Pan India",
+      "company": "Infosys",
+      "location": "Hybrid - Mumbai (All Areas), Pune, Delhi / NCR",
+      "salary": "Not disclosed",
+      "experience": "10-14 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-developer-infosys-pan-india-infosys-pune-delhi-ncr-mumbai-all-areas-10-to-14-years-190625015849",
+      "jobId": "190625015849",
+      "extractedAt": "2025-10-06T12:14:53.624Z",
+      "description": "Infosys Hiring Java+Springboot Developers Exciting Opportunity Awaits!\n\nWe are looking for passionate Java+Springboot Developers to join our dynamic team! If you have experience in skills Java->Springboot this is the perfect opportunity for you.\n\n\n\n\nExperience: 4 to 12 years Location: PAN INDIA Skills Required: Java+Springboot\n\nTake the next step in your career with a company that values innovation and growth! If you're interested or know someone who would be a great fit, apply now or share this opportunity.\n\n\n\n\nApply Now:\n\n#infosyshiring#javaspringboot#developers #diversityhiring\n\n\n\n\nLOCATION: PAN INDIA\n\nEXP:10 to 14 YEARS",
+      "keySkills": [
+        "Java",
+        "Hibernate",
+        "Spring Boot",
+        "J2Ee",
+        "Spring",
+        "Microservices"
+      ],
+      "responsibilities": [
+        "Sap Security Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago",
+        "SAP MM Technical Consultant- Bangalore4-9 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Today",
+        "Sap Mm Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Developer & PAN INDIA-(F)",
+      "company": "Infosys",
+      "location": "Mumbai (All Areas), Pune, Delhi / NCR",
+      "salary": "Not disclosed",
+      "experience": "3-8 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-developer-pan-india-f-infosys-pune-delhi-ncr-mumbai-all-areas-3-to-8-years-140825014286",
+      "jobId": "140825014286",
+      "extractedAt": "2025-10-06T12:14:53.624Z",
+      "description": "Infosys Hiring Java+Springboot Developers Exciting Opportunity Awaits!\n\nWe are looking for passionate Java+Springboot Developers to join our dynamic team! If you have experience in skills Java->Springboot this is the perfect opportunity for you.\n\n\n\n\nExperience: 4 to 12 years Location: PAN INDIA Skills Required: Java+Springboot\n\nTake the next step in your career with a company that values innovation and growth! If you're interested or know someone who would be a great fit, apply now or share this opportunity.\n\n\n\n\nApply Now:\n\n#infosyshiring#javaspringboot#developers #diversityhiring\n\nLOCATION: PAN INDIA\n\nEXP:3 TO 10 YEARS",
+      "keySkills": [
+        "Java",
+        "Hibernate",
+        "Spring Mvc",
+        "Spring Boot",
+        "J2Ee",
+        "Spring",
+        "Microservices"
+      ],
+      "responsibilities": [
+        "Sap Security Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago",
+        "SAP MM Technical Consultant- Bangalore4-9 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Today",
+        "Sap Mm Technical Consultant- Bangalore5-10 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted Few Hours Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Hiring - Java Developer @ Investment Banking",
+      "company": "Net Connect Global",
+      "location": "Hybrid - Mumbai (All Areas), Bengaluru",
+      "salary": "15-30 Lacs PA",
+      "experience": "4-9 Yrs",
+      "link": "https://www.naukri.com/job-listings-hiring-java-developer-investment-banking-net-connect-global-bengaluru-mumbai-all-areas-4-to-9-years-100225017352",
+      "jobId": "100225017352",
+      "extractedAt": "2025-10-06T12:14:53.624Z",
+      "description": "Job Title: Java Backend & Java Full Stack Developer\n\n\n\n\nLocation: Mumbai, Bangalore\n\n\n\n\nExperience Range: 3 to 15 Years\n\n\n\n\nNotice Period: Immediate to 30 Days\n\n\n\n\nAbout the Project:\n\nWe are looking for an experienced, innovative, and highly motivated Web Developer to help design and develop the next generation of Technology & Operations Management Systems Applications. Our platform supports Technology, Operations, and Finance divisions, enabling them to operate efficiently and manage over $4 billion in annual technology spend. Success in this position requires a solid foundation across the complete spectrum of web development and best practices, coupled with strong interpersonal skills.\n\nKey Responsibilities:\n\nContribute to large-scale strategic planning and development.\nDesign, code, test, debug, and document projects related to the technology domain, including upgrades and deployments.\nReview and resolve moderately complex technical challenges requiring an in-depth evaluation of technologies and procedures.\nLead a team to meet existing and potential client needs, leveraging a solid understanding of function, policies, procedures, and compliance requirements.\nCollaborate with peers, colleagues, and mid-level managers to resolve technical challenges and achieve business goals.\nProvide guidance and direction to less experienced staff, acting as an escalation point.\nDesign robust and scalable solutions to support enterprise applications.\nDevelop APIs using REST, MQ, Kafka, and other standard channels.\n\nMust-Have Skills:\n\nStrong experience with the Java and J2EE platforms and frameworks: Java 8, Spring Boot, Spring Framework, REST, Web Services, Tomcat, JBoss.\nExperience in Java 8 or Java 11.\nFor Full Stack Role: 2+ years of experience with ReactJS/Angular 8+.\nExperience with databases like NoSQL or MySQL (e.g., MongoDB, PostgreSQL, DB2, Sybase).\nIn-depth knowledge of design patterns.\nStrong understanding of Agile methodologies and Test-Driven Development (TDD) with a track record of high-quality deliverables.\nSolid understanding of testing technologies, both manual and automation.\n\nGood-to-Have Skills:\n\nFamiliarity with Unix scripting, performance monitoring, and load testing tools.\nKnowledge of Kafka, Hadoop, and Scala.\nExperience with frontend technologies like Angular 8 & above",
+      "keySkills": [
+        "spring boot",
+        "java",
+        "j2ee",
+        "Hibernate",
+        "python",
+        "web services",
+        "tomcat",
+        "Kafka",
+        "Microservices",
+        "angular",
+        "Multithreading",
+        "DB2",
+        "SCALA",
+        "MongoDB",
+        "MVC",
+        "Springboot",
+        "React.Js"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    }
+  ]
+}

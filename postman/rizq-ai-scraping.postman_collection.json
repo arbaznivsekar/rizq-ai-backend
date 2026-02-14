@@ -1,0 +1,64 @@
+{
+  "info": {
+    "name": "Rizq AI - Scraping API",
+    "_postman_id": "8a9f7a2c-2c1e-4c0b-9b7a-1234567890ab",
+    "description": "Test enqueueing a scraping job and checking its status.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "job_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Enqueue Scrape",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/ops/scrape/enqueue",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "ops", "scrape", "enqueue"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"source\": \"indeed\",\n  \"url\": \"https://in.indeed.com/jobs?q=software+engineer&l=remote\"\n}"
+        },
+        "description": "Adds a scraping job to the BullMQ queue."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "try {",
+              "  const data = pm.response.json();",
+              "  if (data && data.jobId) {",
+              "    pm.collectionVariables.set('job_id', data.jobId);",
+              "  }",
+              "} catch (e) {}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get Scrape Job Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/ops/scrape/job/{{job_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "ops", "scrape", "job", "{{job_id}}"]
+        },
+        "description": "Fetches state and data for the given job id."
+      }
+    }
+  ]
+}
+
+

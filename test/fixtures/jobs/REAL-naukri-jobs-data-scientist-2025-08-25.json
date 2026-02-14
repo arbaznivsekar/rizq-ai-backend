@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-08-25T14:49:55.164Z",
+  "source": "naukri.com",
+  "searchQuery": "data scientist",
+  "location": "Bangalore",
+  "totalJobs": 1,
+  "note": "These are REAL jobs scraped from Naukri.com - No fake data!",
+  "jobs": [
+    {
+      "title": "Data Scientist I",
+      "company": "360DigiTMG",
+      "location": "Bengaluru",
+      "salary": "Not specified",
+      "experience": "0-2 Yrs",
+      "link": "https://www.naukri.com/job-listings-data-scientist-i-360digitmg-bengaluru-0-to-2-years-180825504073",
+      "extractedAt": "2025-08-25T14:49:45.460Z",
+      "description": "Job Description:\nSwiggy is hiring for the position of Data Scientist I in Bengaluru, Karnataka, India. The role involves applying Machine Learning (ML) and Deep Learning (DL) techniques to solve business problems\nin the e-commerce and logistics domain.\nResponsibilities:\nDevelop and apply ML/DL models to address business challenges.\nWork with large datasets ( big data ) and deploy ML/DL models in production.\nFormulate and solve problems using first-principles thinking.\nCollaborate with teams to enhance data-driven decision-making.\nCommunicate insights effectively through strong verbal and written skills.\nRequirements:\nEducation: Bachelor's or Master's degree in a quantitative field.\nExperience: 0-2 years in industry or research labs.\nTechnical Skills:\nStrong problem-solving abilities.\nHands-on experience with ML/DL and statistical techniques.\nProficiency in Python, SQL, Spark, TensorFlow.\nExperience in e-commerce and logistics (preferred).\nKnowledge of Generative AI (preferred).\nWay of working - Remote: Employees will have the freedom to work remotely all through the year. These employees, who form a large majority, will come together in their base location for a week, once every quarter.",
+      "keySkills": [
+        "deep learning",
+        "spark",
+        "Machine learning",
+        "E-commerce",
+        "Deployment",
+        "Research",
+        "big data",
+        "SQL",
+        "Logistics",
+        "Python"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    }
+  ]
+}

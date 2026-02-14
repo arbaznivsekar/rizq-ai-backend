@@ -1,0 +1,93 @@
+{
+  "info": {
+    "name": "RIZQ.AI - Gmail Outreach",
+    "_postman_id": "gmail-outreach-collection-0001",
+    "description": "Test consent and one-click Gmail outreach.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "auth_token", "value": "" },
+    { "key": "job_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "1) Give Consent",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{auth_token}}", "disabled": true }
+        ],
+        "url": { "raw": "{{base_url}}/api/v1/email-outreach/consent", "host": ["{{base_url}}"], "path": ["api","v1","email-outreach","consent"] },
+        "body": { "mode": "raw", "raw": "{\n  \"details\": \"Agreed to send up to 40 job emails/day via Gmail\"\n}" }
+      }
+    },
+    {
+      "name": "2) Create Test Job",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{auth_token}}", "disabled": true }
+        ],
+        "url": { "raw": "{{base_url}}/api/v1/jobs", "host": ["{{base_url}}"], "path": ["api","v1","jobs"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jobs\": [\n    {\n      \"title\": \"Senior Node.js Engineer\",\n      \"company\": \"Acme Corp\",\n      \"location\": \"Remote\",\n      \"description\": \"Hands-on Node/TS\",\n      \"postedAt\": \"2025-09-16T10:00:00.000Z\"\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "3) Get Jobs (fetch _id)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{auth_token}}", "disabled": true }
+        ],
+        "url": { "raw": "{{base_url}}/api/v1/jobs", "host": ["{{base_url}}"], "path": ["api","v1","jobs"] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "try {",
+              "  const data = pm.response.json();",
+              "  if (data && data.items && data.items.length) {",
+              "    pm.collectionVariables.set('job_id', data.items[0]._id || data.items[0].id);",
+              "    console.log('job_id set to:', pm.collectionVariables.get('job_id'));",
+              "  }",
+              "} catch(e) { console.log('Parse error', e); }"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4) One-Click Apply (Queue Outreach)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{auth_token}}", "disabled": true }
+        ],
+        "url": { "raw": "{{base_url}}/api/v1/email-outreach/one-click-apply", "host": ["{{base_url}}"], "path": ["api","v1","email-outreach","one-click-apply"] },
+        "body": { "mode": "raw", "raw": "{\n  \"jobIds\": [\"{{job_id}}\"]\n}" }
+      }
+    },
+    {
+      "name": "5) Withdraw Consent",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{auth_token}}", "disabled": true }
+        ],
+        "url": { "raw": "{{base_url}}/api/v1/email-outreach/withdraw-consent", "host": ["{{base_url}}"], "path": ["api","v1","email-outreach","withdraw-consent"] }
+      }
+    }
+  ]
+}
+

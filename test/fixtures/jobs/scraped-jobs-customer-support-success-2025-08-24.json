@@ -1,0 +1,16 @@
+{
+  "timestamp": "2025-08-24T11:46:30.163Z",
+  "searchQuery": "customer support",
+  "location": "remote",
+  "type": "success",
+  "totalJobs": 1,
+  "jobs": [
+    {
+      "title": "AppFolio",
+      "company": "Unknown Company",
+      "location": "Unknown Location",
+      "salary": "Not specified",
+      "link": "https://www.indeed.com/cmp/Appfolio?campaignid=mobvjcmp&from=mobviewjob&tk=1j3dud69ajcfu806&fromjk=57496943143ce700"
+    }
+  ]
+}

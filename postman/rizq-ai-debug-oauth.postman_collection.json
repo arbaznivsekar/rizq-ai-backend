@@ -1,0 +1,70 @@
+{
+  "info": {
+    "name": "RIZQ.AI - Debug OAuth Configuration",
+    "description": "Debug OAuth configuration and environment variables",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" }
+  ],
+  "item": [
+    {
+      "name": "1. Check OAuth Start (Debug)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/auth/google/connect",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "auth", "google", "connect"]
+        },
+        "description": "Debug OAuth start to see what's happening"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "console.log('🔍 DEBUG - OAuth Start Response:');",
+              "console.log('Status Code:', pm.response.code);",
+              "console.log('Response Headers:', pm.response.headers);",
+              "console.log('Response Size:', pm.response.responseSize);",
+              "console.log('Response Time:', pm.response.responseTime);",
+              "",
+              "if (pm.response.code === 302) {",
+              "  console.log('✅ Correct: 302 Redirect');",
+              "  const location = pm.response.headers.get('Location');",
+              "  console.log('Redirect URL:', location);",
+              "  if (location && location.includes('accounts.google.com')) {",
+              "    console.log('✅ Redirecting to Google OAuth');",
+              "  } else {",
+              "    console.log('❌ Not redirecting to Google');",
+              "  }",
+              "} else if (pm.response.code === 200) {",
+              "  console.log('❌ Problem: Getting 200 OK instead of 302 redirect');",
+              "  console.log('This means OAuth is not working correctly');",
+              "  console.log('Response body preview:', pm.response.text().substring(0, 200) + '...');",
+              "} else {",
+              "  console.log('❌ Unexpected status code:', pm.response.code);",
+              "  console.log('Response:', pm.response.text());",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Check Server Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        }
+      }
+    }
+  ]
+}

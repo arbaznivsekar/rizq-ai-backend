@@ -1,0 +1,271 @@
+{
+  "timestamp": "2025-10-06T12:08:17.784Z",
+  "source": "naukri.com",
+  "searchQuery": "backend developer",
+  "location": "Mumbai",
+  "totalJobs": 10,
+  "note": "These are REAL jobs scraped from Naukri.com - No fake data!",
+  "jobs": [
+    {
+      "title": "Fullstack Developer/ Back End Developer / Front end Developer",
+      "company": "Bureau Veritas Consumer Products Services",
+      "location": "Mumbai (All Areas)(Andheri MIDC)",
+      "salary": "Not disclosed",
+      "experience": "08 Oct",
+      "link": "https://www.naukri.com/job-listings-fullstack-developer-back-end-developer-front-end-developer-bureau-veritas-consumer-products-services-mumbai-all-areas-4-to-5-years-031025016720",
+      "jobId": "031025016720",
+      "extractedAt": "2025-10-06T12:07:22.840Z",
+      "description": "Skills/Experience: (Fullstack/ Strong Java 8 (Backend) / Strong Backend (Angular 16)\n(Mandatory)\n\nAt least 4-5 years of experience in application development (Java Web/Enterprise)\nGood understanding of OO techniques\nExperience with Architecture and design of complex industrial applications\nGood Core Java , JavaScript, JQuery , Spring , JDBC\nStrong DB and SQL knowledge. Should be able to write project related SQL by his/her own.\nHandsome knowledge of Full Stack Development\nAbility to define requirements and work in a concept-to-design model\nGood communication & interpersonal skills.\n\n(Strongly -Preferred):\n\nExperience on understanding Spring- Mybatis (or equivalent),\nGood knowledge for PL- SQL and Oracle\nAngularJs, Angular, Spring boot\nAspose , Jasper-report , Poi\nExperience with agile software development is an added skill.\nKnowledge of Design Patterns and tools.\nKnowledge of tools like JIRA, SVN & Confluence.\n\n(Good to have):\n\nEDI and Talend ETL tools\nKnowledge about CSS3/ CCS4, Bootstrap, Font-Awesome, Node.js etc.\nHibernate, only in case should have SQL writing skills.",
+      "keySkills": [
+        "Java",
+        "Angular 16",
+        "Java 8",
+        "Angular",
+        "Css/Css3",
+        "Javascript",
+        "HTML"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Morningstar",
+      "location": "Mumbai",
+      "salary": "Not disclosed",
+      "experience": "2-5 Yrs",
+      "link": "https://www.naukri.com/job-listings-software-engineer-morningstar-india-p-ltd-mumbai-2-to-5-years-040925032217",
+      "jobId": "040925032217",
+      "extractedAt": "2025-10-06T12:07:22.840Z",
+      "description": "Title: Software Engineer\n\nLocation: Vashi, Navi Mumbai\n\nCompany:\n\nMorningstar is a leading provider of independent investment research in North America, Europe, Australia, and Asia. We offer a wide variety of products and solutions that serve market participants of all kinds, including individual and institutional investors in public and private capital markets, financial advisors, asset managers, retirement plan providers and sponsors, and issuers of securities. Morningstar India has been a Great Place to Work-certified company for the past eight consecutive years.\n\nRole: We are seeking a highly skilled and experienced Senior Software Engineer to join our Wealth - Individual Investor team. The ideal candidate will have a strong background in .NET development, proficiency with AWS, and exposure to AI technologies. Experience with Node.js is also desired. This role will involve designing, developing, and maintaining software solutions that enhance our individual investor products.\n\nShift - General\n\nResponsibilities:\n\nDesign, develop, and maintain scalable and high-performance software solutions using .NET and AWS.\n\nCollaborate with cross-functional teams to define, design, and ship new features.\n\nEnsure the performance, quality, and responsiveness of applications.\n\nIdentify and correct bottlenecks and fix bugs.\n\nHelp maintain code quality, organization, and automation.\n\nStay up to date with the latest industry trends and technologies to ensure our solutions remain cutting-edge.\n\nQualifications:\n\nMinimum of 5 years of experience in software development with a strong focus on .NET technologies.\n\nProficiency with AWS services and infrastructure.\n\nExperience with front-end and back-end development using Vue.js and Node.js.\n\nStrong understanding of software development principles, design patterns, and best practices.\n\nExcellent problem-solving skills and attention to detail.\n\nStrong communication and collaboration skills.\n\nProficient with Agile development methodologies.\n\nFamiliarity with Agile development methodologies.\n\nExposure to AI and machine learning technologies.\n\nExperience with Node.js.\n\nExperience in the financial services industry is a plus.\n\nWhy Join Us:\n\nBe part of a mission-driven organization that empowers investor success.\n\nWork with a talented and passionate team.\n\nOpportunities for professional growth and development.\n\nCompetitive compensation and benefits package.\n\nMorningstar is an equal opportunity employer.",
+      "keySkills": [
+        "software development",
+        "aws iam",
+        "vue.js",
+        "machine learning",
+        "backend development",
+        "net development",
+        "artificial intelligence",
+        "javascript",
+        "node",
+        "node.js",
+        "agile development methodology",
+        "design patterns",
+        "collaboration",
+        "infrastructure",
+        "software engineering",
+        "agile",
+        "aws",
+        "communication skills"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Back End Developer",
+      "company": "BNP Paribas",
+      "location": "Hybrid - Mumbai (All Areas)",
+      "salary": "30-40 Lacs PA",
+      "experience": "7-12 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-back-end-developer-bnp-paribas-mumbai-all-areas-7-to-12-years-220925914932",
+      "jobId": "220925914932",
+      "extractedAt": "2025-10-06T12:07:22.840Z",
+      "description": "Position Purpose\n\nProvide a brief description of the overall purpose of the position, why this position exists and how it will contribute in achieving the teams goal.\n\nPosition for Java backend expert / tech lead (Java, spring, hibernate, oracle sql, JEE, microservice, Liquibase etc). is required to work on ADM assignments i.e. development, maintenance, unit testing and contribute in regression testing. He/she would need to contribute in proposing backend designs, perform design review, and present to technical architecture and technical lead community, and implement solution in MyCreditApp. He/she would need to mentor the team in on java backend technologies, take knowledge sharing session, do peer programming and help team to improve their skills.\n\nResponsibilities\n\nDirect Responsibilities\n\n# Study user requirement, develop specifications, design, code program, test and implement systems in line with Group standards and regulatory requirements IN ORDER TO meet user (business) requirements.\n\n\n# Adapt to current architecture and development of backend with latest technical stack\n\n\n# Coaching & Mentoring, Peer programming\n\n# Follow all the best practices and quality process of the project.\n\n# Contribute in stringent code reviews and maintaining the quality of the application.\n\n\n# Handle development/design projects using core Java, Oracle, Spring, Hibernate, Web services (REST), DevOps tools (Jenkins) , Build Tool (Maven)\n\n\n# Ensure thorough Unit test case coverage (Junit)\n\n\n# Perform Estimation and Planning and Proactive Status reporting to the management at both Paris/India and ISPL ends\n\n\nContributing Responsibilities\n\n# Contribute to hiring by conducting technical interviews in ISPL\n\nTechnical & Behavioral Competencies\n\n# Tech skills -\n\nJava (version 15 or above)\nSpring\nHibernate\nSql, Liquibase\nMicro services\nbitbucket / Git or other version control tool\nJunit\nREST API\nDevSecOps tools e.g. Jenkins, Kubernetes (Nice to Have)\n\n\n# Develop programs in optimal manner without compromising core architecture/design\n\n\n# Make thorough impact analysis – impact study, possible regressions, Better unit test coverage\n\n\n# Contribute in creating technical documentation and maintain in repository\n\n\n# Work on the technologies efficiently and produce best fit deliveries",
+      "keySkills": [
+        "Java",
+        "Hibernate",
+        "Rest Api",
+        "Spring",
+        "Microservices",
+        "JUnits"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Senior Backend Developer",
+      "company": "Calsoft",
+      "location": "Mumbai (All Areas)(Airoli)",
+      "salary": "Not disclosed",
+      "experience": "6-10 Yrs",
+      "link": "https://www.naukri.com/job-listings-senior-backend-developer-calsoft-mumbai-all-areas-6-to-10-years-031025004474",
+      "jobId": "031025004474",
+      "extractedAt": "2025-10-06T12:07:22.841Z",
+      "description": "1. Job Title: Senior Backend Developer Cloud Native (Java/Spring Boot)\n\n\nJob Summary:\n\n\nWe are looking for an experienced Senior Backend Developer to be a key\npart of our next-generation cloud-native Home Loan Platform. You will\ndesign, develop, and maintain robust and scalable backend services\nusing Java and Spring Boot. This role requires hands-on experience\nwith distributed systems, event-driven architecture, and modern cloud\npractices (GCP, AWS), along with deep expertise in building secure and\nresilient APIs.\n\n\nKey Responsibilities:\n\n\nDesign and develop microservices using Java 21+ and Spring Boot.\nBuild and expose RESTful APIs for integration with cloud/on-prem applications.\nImplement reliable messaging using Confluent Kafka.\nIntegrate with YugabyteDB for distributed, highly available data storage.\nLeverage DAPR for sidecar-based microservice building blocks like\nservice invocation, pub-sub, secrets, and state management.\nIntegrate long-running business workflows using Temporal.\nEnsure code quality via unit testing, integration testing, code\nreviews, and CI/CD pipelines.\nOptimize performance, scalability, and security of backend services.\nWork in Agile teams and collaborate with DevOps, QA, and other developers.\nDocument systems and contribute to API specs and design documentation.\n\n\nRequired Skills:\n\n\n6+ years of experience in backend development.\nStrong hands-on experience in Java, Spring Boot, REST APIs.\nGood understanding of cloud-native development (12-factor app) principles.\nExperience with Kafka for event streaming.\nExposure to YugabyteDB or similar distributed SQL/NoSQL DBs\n(Cassandra, CockroachDB, etc.).\nFamiliarity with DAPR, Temporal is a plus.\nKnowledge of Docker, Kubernetes, CI/CD pipelines.\nFamiliarity with both GCP and AWS is preferred.\nStrong understanding of security, logging, tracing, and monitoring in\nmicroservices.\nExcellent problem-solving and communication skills.\n\nShould be good in Observability and metrics. Have knowledge on Prometheus.",
+      "keySkills": [
+        "Backend Development",
+        "Java",
+        "Kafka",
+        "Spring Boot",
+        "Microservices",
+        "SQL",
+        "Rest",
+        "NoSQL",
+        "Docker",
+        "GCP",
+        "API",
+        "AWS",
+        "Kubernetes"
+      ],
+      "responsibilities": [
+        "Java Developer4-6 YrsHybrid - Kolkata, Pune, BengaluruPosted 5 Days Ago",
+        "Python SDET4-7 YrsHybrid - Pune, BengaluruPosted 5 Days Ago",
+        "Python Automation Engineer4-9 YrsHybrid - PunePosted 5 Days Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Java Back End Developer",
+      "company": "Tata Consultancy Services",
+      "location": "Mumbai (All Areas), Chennai, Bengaluru",
+      "salary": "Not disclosed",
+      "experience": "6-11 Yrs",
+      "link": "https://www.naukri.com/job-listings-java-back-end-developer-tata-consultancy-services-chennai-bengaluru-mumbai-all-areas-6-to-11-years-170925027960",
+      "jobId": "170925027960",
+      "extractedAt": "2025-10-06T12:07:22.841Z",
+      "description": "Greetings,\n\n\n\n\nTCS is looking for Java Backend Developer.\n\n\n\n\nExperience: 6+ Years\n\n\n\n\nEducation: Minimum 15 years of full-time education (10th, 12th and Graduation)\n\n\n\n\nLocation: Bangalore/ Chennai/ Mumbai/Pune/ Hyderabad/Kolkata.\n\n\n\n\nRequirements & Skills: \n\n\n\n\nMust-Have\n\nJava 8, Spring boot, Micro services, Kafka, Web\nServices/REST/SOAP\nGit concepts, Eclipse/IntelliJ IDE, Jenkins Docker concept.\n\nGood-to-Have\n\nBanking domain knowledge, Familiar with Linux based development\nenvironment.\nAGILE Concepts.\n\n\n\nResponsibility of / Expectations from the Role\n\n1 Programming skills with good understanding of OOP concepts and data structures\n2 Server-side Java development skills (Java standard libraries, Spring Boot, Web\nServices/REST/SOAP)\n3 Git concepts, Eclipse/IntelliJ IDE, Jenkins\n4 Linux environment\n5 familiar with SOAP applications\n\n\n\nIf you are interested kindly forward your updated resume on Trupti.Kadlak@Tcs.com.\n\n\n\n\nThanks & Regards,\n\nTalent Acquisition Group.",
+      "keySkills": [
+        "Java",
+        "Rest",
+        "Kafka",
+        "Spring Boot",
+        "SOAP",
+        "Microservices",
+        "Web Services"
+      ],
+      "responsibilities": [
+        "Statistical Programmer7-12 YrsPune, Delhi / NCR, Mumbai (All Areas)Posted 20 Days Ago",
+        "Data Quality System Testing Expert7-12 YrsPune, Bengaluru, Mumbai (All Areas)Posted 13 Days Ago",
+        "AWS Java Full stack Developer5-10 YrsPune, Bengaluru, Delhi / NCRPosted 2 Days Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Associate/Sr. Associate Backend Developer",
+      "company": "National Payments Corporation of India (NPCI)",
+      "location": "Mumbai (All Areas), Hyderabad",
+      "salary": "Not disclosed",
+      "experience": "3-6 Yrs",
+      "link": "https://www.naukri.com/job-listings-associate-sr-associate-backend-developer-national-payments-corporation-of-india-npci-hyderabad-mumbai-all-areas-3-to-6-years-170624001732",
+      "jobId": "170624001732",
+      "extractedAt": "2025-10-06T12:07:22.841Z",
+      "description": "Role Contour : The Backend Developer is responsible for system functionality. Its function is to integrate the application with all necessary systems and services and provide a clean and easy-to-use API in the frontend. Although his work is often hidden from the user, he has full responsibility for the functionality, performance and scalability of the application. Knows how to write clean, modern APIs, integrate with legacy systems, and work with databases.\n\n\n\n\nAccountabilities :\n\n• Design and develop the business logic and product backend systems.\n\n• Work closely with frontend developers to design and develop functional, performance and complete APIs.\n\n• Decrypt existing enterprise software systems and connect application to applicable data sources.\n\n• Write unit, integration, and performance tests. Develop automation tools and continuous integration pipelines for daily tasks.\n\n• Develop at high quality, with good documentation and with efficient code.\n\n• Challenge ideas and opinions to avoid errors and inefficient solutions.\n\n\n\n\nQualifications and Skills :\n\n• 3+ years of experience as backend developer with experience in Java, Node, Scala, etc., significant API expertise for large-scale apps and performance optimization.\n\n• Deep knowledge of programming principles and object-oriented engineering (e.g., SOLID, clean architecture).\n\n• Familiarity with SQL and NoSQL databases (e.g., MySQL, Oracle, MongoDB).\n\n• Integration experience with JavaScript frameworks (React, Angular JS)\n\n• Effective testing abilities (unit, integration, API)\n\n\n\n\nAgile/Digital Experience :\n\n• Strong understanding of agile methodologies\n\n• Experience as a developer in a cross-functional agile team\n\n\n\n\nIndividual Skills :\n\n• Strong communication skills with the ability to communicate complex nical concepts and align the organization on decisions\n\n• Strong problem-solving skills to quickly process complex information and present it clearly and effectively\n\n• Utilize team collaboration to create innovative solutions efficiently\n\n\n\n\nMindsets and Behaviors :\n\n• Passionate about technology and excited about the impact of emerging/disruptive technologies\n\n• Wants to unleash the internal entrepreneur and work in an environment that fosters entrepreneurial minds\n\n• Believes in the culture of transparency and trust and open to learning new ideas.",
+      "keySkills": [
+        "Java",
+        "Hibernate",
+        "Backend",
+        "Spring Boot"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "SW Developer Backend",
+      "company": "Bahwan CyberTek",
+      "location": "Mumbai",
+      "salary": "Not disclosed",
+      "experience": "5-10 Yrs",
+      "link": "https://www.naukri.com/job-listings-sw-developer-backend-bahwan-cybertek-mumbai-5-to-10-years-200325504395",
+      "jobId": "200325504395",
+      "extractedAt": "2025-10-06T12:07:22.841Z",
+      "description": "A. Backend Development\nDesign, develop, and maintain backend systems using Node.js, Strapi,\nPostgreSQL, Socket.io, and Redis.\nBuild and optimize APIs for seamless integration with frontend technologies\n(Next.js, React.js).\nImplement real-time communication features using Socket.io.\nEnsure database efficiency and security with PostgreSQL.\nUtilize Redis for caching and improving application performance.\nB. Game Development\nDevelop and maintain game backend logic using Phaser.js and Node.js.\nImplement multiplayer functionality and real-time game interactions.\nOptimize game performance and ensure scalability.\nC. Blockchain Smart Contracts\nWrite and deploy smart contracts using Solidity for NFT rewards and\ntransaction security.\nIntegrate Ethereum and Polygon Blockchain for decentralized reward\ndistribution and NFT marketplace functionality.\nEnsure the security and efficiency of blockchain transactions and smart\ncontracts.\nCollaborate with frontend developers to integrate blockchain features into the\nuser interface.\nD. System Integration Security\nIntegrate backend systems with frontend technologies to ensure seamless\nfunctionality.\nImplement security best practices to protect data and transactions.\nConduct regular code reviews and performance optimizations.\nE. Collaboration Support\nWork closely with frontend developers, game developers, and other team\nmembers to ensure cohesive development efforts.\nProvide technical support and troubleshooting for backend systems.\nDocument code and development processes for future reference.\nF. Deliverables\n1. Backend Systems\nFully functional and optimized backend systems using Node.js, Strapi,\nPostgreSQL, Socket.io, and Redis.\n2. APIs\nWell-documented and efficient APIs for integration with frontend\ntechnologies.\n3. Game Backend\nRobust backend logic for game development using Phaser.js and Node.js.\n4. Smart Contracts\nDeployed smart contracts for NFT rewards and transaction security using\nSolidity.\n5. Blockchain Integration\nIntegrated Ethereum and Polygon Blockchain for decentralized reward\ndistribution and NFT marketplace.\n6. Documentation\nComprehensive documentation for all backend systems, APIs, and blockchain\nintegrations.\n\n\n\nA. Backend Development\nDesign, develop, and maintain backend systems using Node.js, Strapi,\nPostgreSQL, Socket.io, and Redis.\nBuild and optimize APIs for seamless integration with frontend technologie",
+      "keySkills": [
+        "Backend",
+        "Front end",
+        "Postgresql",
+        "System integration",
+        "Javascript",
+        "Deployment",
+        "Troubleshooting",
+        "Technical support",
+        "game development"
+      ],
+      "responsibilities": [
+        "Kafka Architect10-15 YrsHybrid - Pune, Chennai, BengaluruPosted 14 Days Ago",
+        "Kafka Architect10-18 YrsHybrid - Pune, Chennai, BengaluruPosted 17 Days Ago",
+        "Servicenow Developer6-11 YrsPune, Chennai, BengaluruPosted 8 Days Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Senior Software Engineer AI/ML Backend Developer",
+      "company": "CGI",
+      "location": "Mumbai (All Areas), Hyderabad, Bengaluru",
+      "salary": "10-15 Lacs PA",
+      "experience": "4-9 Yrs",
+      "link": "https://www.naukri.com/job-listings-senior-software-engineer-ai-ml-backend-developer-cgi-hyderabad-bengaluru-mumbai-all-areas-4-to-9-years-160925038095",
+      "jobId": "160925038095",
+      "extractedAt": "2025-10-06T12:07:22.841Z",
+      "description": "Senior Software Engineer-AI/ML Backend Developer\n\n\nPosition Description\nCompany Profile:\nFounded in 1976, CGI is among the largest independent IT and business consulting services firms in the world. With 94,000 consultants and professionals across the globe, CGI delivers an end-to-end portfolio of capabilities, from strategic IT and business consulting to systems integration, managed IT and business process services and intellectual property solutions. CGI works with clients through a local relationship model complemented by a global delivery network that helps clients digitally transform their organizations and accelerate results. CGI Fiscal 2024 reported revenue is CA$14.68 billion and CGI shares are listed on the TSX (GIB.A) and the NYSE (GIB). Learn more at cgi.com.\n\n\nPosition: Senior Software Engineer-AI/ML Backend Developer\nExperience: 4-6 years\nCategory: Software Development/ Engineering\nLocation: Bangalore/Hyderabad/Chennai/Pune/Mumbai\nShift Timing-General Shift\nPosition ID: J0725-0150\nEmployment Type: Full Time\n\n\nEducation Qualification: Bachelor's degree in computer science or related field or higher with minimum 4 years of relevant experience.\n\n\nWe are seeking an experienced AI/ML Backend Developer to join our dynamic technology team. The ideal candidate will have a strong background in developing and deploying machine learning models, implementing AI algorithms, and managing backend systems and integrations. You will play a key role in shaping the future of our technology by integrating cutting-edge AI/ML techniques into scalable backend solutions.\n\n\nYour future duties and responsibilities\nDevelop, optimize, and maintain backend services for AI/ML applications.\n- Implement and deploy machine learning models to production environments.\n- Collaborate closely with data scientists and frontend engineers to ensure seamless integration of backend APIs and services.\n- Monitor and improve the performance, reliability, and scalability of existing AI/ML services.\n- Design and implement robust data pipelines and data processing workflows.\n- Identify and solve performance bottlenecks and optimize AI/ML algorithms for production.\n- Stay current with emerging AI/ML technologies and frameworks to recommend and implement improvements.\n\n\nRequired qualifications to be successful in this role\nMust-have Skills-Python, TensorFlow, PyTorch, scikit-learn\n\n\n- Machine learning frameworks: TensorFlow, PyTorch, scikit-learn\n- Backend development frameworks: Flask, Django, FastAPI\n- Cloud technologies: AWS, Azure, Google Cloud Platform (GCP)\n- Containerization and orchestration: Docker, Kubernetes\n- Data management and pipeline tools: Apache Kafka, Apache Airflow, Spark\n- Database technologies: SQL databases (PostgreSQL, MySQL), NoSQL databases (MongoDB, Cassandra)\n- Vector Databases: Pinecone, Milvus, Weaviate\n- Version Control: Git\n- Continuous Integration/Continuous Deployment (CI/CD) pipelines: Jenkins, GitHub Actions, GitLab CI/CD\n\n\nMinimum of 4 years of experience developing backend systems, specifically in AI/ML contexts.\n- Proven experience in deploying machine learning models and AI-driven applications in production.\n- Solid understanding of machine learning concepts, algorithms, and deep learning techniques.\n- Proficiency in writing efficient, maintainable, and scalable backend code.\n- Experience working with cloud platforms (AWS, Azure, Google Cloud).\n- Strong analytical and problem-solving skills.\n- Excellent communication and teamwork abilities.\n\n\nGood to have Skills-Java (preferred), Scala (optional)\n\n\n\n\nPlease share your updated profile on mimansha.varma@cgi.com or apply through CGI career page against J0725-0147 Job ID .",
+      "keySkills": [
+        "Artificial Intelligence",
+        "Natural Language Processing",
+        "Machine Learning",
+        "Deep Learning",
+        "Python",
+        "Aiml"
+      ],
+      "responsibilities": [
+        "Service Desk Engineer2-4 YrsPunePosted 17 Days Ago",
+        "Senior Data Engineer6-11 YrsPunePosted 24 Days Ago",
+        "Java Full Stack Developer/Lead6-11 YrsHybrid - Hyderabad, Pune, BengaluruPosted 20 Days Ago"
+      ],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Software Developer (Backend Engineer)",
+      "company": "Coverfox",
+      "location": "Mumbai, Bengaluru",
+      "salary": "Not disclosed",
+      "experience": "1-2 Yrs",
+      "link": "https://www.naukri.com/job-listings-software-developer-backend-engineer-coverfox-insurance-broking-mumbai-bengaluru-1-to-2-years-260523502576",
+      "jobId": "260523502576",
+      "extractedAt": "2025-10-06T12:07:22.841Z",
+      "description": "The role of software developer (backend) is to work closely on development projects with the product team on various insurance products and features to drive growth. The key skills required are Python/Go/Java. The job would include continuous collaboration with engineers, product managers and quality team and hence ability and desire to work in a team is a must.\n\nMust be proficient in at least one programming language, preferred Python/Go/Java.\nMust have good debugging and communication skills.\nShould be a team player.\nAt least 2+ years of experience in product based organizations as a software developer.\nMust have working knowledge with backend and frontend development.\nKnowledge of software architecture and design principles.\nFamiliarity with databases (e.g. SQL), backend-services (e. g. RESTful).\nMust know hands-on work experience on Django or similar backend framework.\nMust have knowledge of GIT.\n\nCandidate Profile:\n\nWorking knowledge of deploying applications on Cloud infrastructure like AWS.\nExposure to micro services architecture is an added advantage.\nExperience with AWS Lambda, Elastic Search, Kafka, Celery adds an advantage.\nCollaboration in open-source projects will add brownie points to your profile.",
+      "keySkills": [
+        "software architecture",
+        "Backend",
+        "GIT",
+        "Architecture",
+        "Django",
+        "Debugging",
+        "Open source",
+        "AWS",
+        "SQL",
+        "Python"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    },
+    {
+      "title": "Backend Developer (Python + Flask/FastAPI + Cloud)",
+      "company": "Xoriant",
+      "location": "Hybrid - Mumbai (All Areas), Pune, Bengaluru",
+      "salary": "8-16 Lacs PA",
+      "experience": "3-7 Yrs",
+      "link": "https://www.naukri.com/job-listings-backend-developer-python-flask-fastapi-cloud-xoriant-pune-bengaluru-mumbai-all-areas-3-to-7-years-160925038971",
+      "jobId": "160925038971",
+      "extractedAt": "2025-10-06T12:07:22.841Z",
+      "description": "Xoriant is hiring backend developers\n\n\n\n\nJob Description:\n\nBackend Developer (Python + Flask/FastAPI + Cloud)\n\nBackend Developer with strong expertise in Python, Flask/FastAPI, and REST API development, along with experience in cloud platforms (AWS/Azure).\n\n\n\n\nResponsibilities:\n\nBuild and maintain backend services and REST APIs using Flask/FastAPI.\nWork with message queues/topics (Kafka, RabbitMQ, Azure Service Bus, AWS SQS/SNS).\nOrchestrate payloads from multiple endpoints and deliver to downstream systems.\nDeploy and scale applications on AWS/Azure.\nFollow SDLC best practices (Agile, CI/CD, testing, documentation).\n\nRequired Skills:\n\n3 to 7 years of backend development experience with Python.\nStrong expertise in Flask or FastAPI.\nProven experience in REST API design and development.\nHands-on experience with cloud services (AWS/Azure).\nExperience with message queues/event-driven systems.\n\n\n\nNice to Have:\n\nHands on experience in any UI technology\nSQL/NoSQL databases\n\nMonitoring/logging tools (ELK, Grafana, CloudWatch, Azure Monitor)",
+      "keySkills": [
+        "Rest Api Development",
+        "Cloud",
+        "Fast Api",
+        "Python",
+        "Flask"
+      ],
+      "responsibilities": [],
+      "requirements": [],
+      "niceToHave": []
+    }
+  ]
+}

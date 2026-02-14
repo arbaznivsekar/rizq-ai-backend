@@ -1,0 +1,279 @@
+{
+  "info": {
+    "name": "RIZQ.AI - Enterprise Scraping API",
+    "_postman_id": "enterprise-scraping-1234-5678-9abc-def0",
+    "description": "Comprehensive Postman collection for testing the enterprise-grade job scraping system. Includes job management, continuous scraping, monitoring, and health checks.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "admin_token", "value": "your-admin-jwt-token-here" },
+    { "key": "job_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Job Management",
+      "item": [
+        {
+          "name": "Start Scraping Job",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/jobs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "jobs"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"boardType\": \"indeed\",\n  \"searchParams\": {\n    \"query\": \"software engineer\",\n    \"location\": \"remote\",\n    \"radius\": 25,\n    \"jobType\": [\"Full-time\", \"Remote\"],\n    \"level\": [\"Mid\", \"Senior\"],\n    \"salaryMin\": 80000,\n    \"salaryMax\": 150000,\n    \"remote\": true,\n    \"easyApply\": true,\n    \"postedWithin\": 7\n  },\n  \"config\": {\n    \"maxPagesPerSearch\": 5,\n    \"extractFullDescription\": true,\n    \"delayBetweenRequests\": 3000\n  }\n}"
+            },
+            "description": "Start a new scraping job for Indeed with specific search parameters and configuration."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "try {",
+                  "  const response = pm.response.json();",
+                  "  if (response && response.jobId) {",
+                  "    pm.collectionVariables.set('job_id', response.jobId);",
+                  "    console.log('Job ID set:', response.jobId);",
+                  "  }",
+                  "} catch (e) {",
+                  "  console.error('Failed to set job ID:', e);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get All Active Jobs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/jobs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "jobs"]
+            },
+            "description": "Retrieve all currently active scraping jobs with their status and metadata."
+          }
+        },
+        {
+          "name": "Get Job Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/jobs/{{job_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "jobs", "{{job_id}}"]
+            },
+            "description": "Get detailed status and results for a specific scraping job."
+          }
+        },
+        {
+          "name": "Cancel Job",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/jobs/{{job_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "jobs", "{{job_id}}"]
+            },
+            "description": "Cancel a running or pending scraping job."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Continuous Scraping",
+      "item": [
+        {
+          "name": "Start Continuous Scraping",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/continuous/start",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "continuous", "start"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"boardTypes\": [\"indeed\"],\n  \"searchQueries\": [\n    \"software engineer\",\n    \"data scientist\",\n    \"product manager\",\n    \"devops engineer\"\n  ],\n  \"intervalMinutes\": 60\n}"
+            },
+            "description": "Start continuous scraping with automatic intervals for multiple job boards and search queries."
+          }
+        },
+        {
+          "name": "Stop Continuous Scraping",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/continuous/stop",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "continuous", "stop"]
+            },
+            "description": "Stop the continuous scraping service."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Monitoring & Statistics",
+      "item": [
+        {
+          "name": "Get Scraping Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "stats"]
+            },
+            "description": "Get comprehensive statistics about scraping performance, success rates, and job statuses."
+          }
+        },
+        {
+          "name": "Get Available Scrapers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/scrapers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "scrapers"]
+            },
+            "description": "Get list of available job board scrapers and their current status."
+          }
+        },
+        {
+          "name": "Scraping Service Health Check",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "health"]
+            },
+            "description": "Check the health status of the scraping service, including Redis connectivity and scraper status."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Maintenance",
+      "item": [
+        {
+          "name": "Cleanup Scraping Service",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/cleanup",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "cleanup"]
+            },
+            "description": "Clean up all scraping resources, including browser instances and cached data."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Example Job Configurations",
+      "item": [
+        {
+          "name": "LinkedIn Scraping (Future)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/jobs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "jobs"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"boardType\": \"linkedin\",\n  \"searchParams\": {\n    \"query\": \"machine learning engineer\",\n    \"location\": \"San Francisco\",\n    \"level\": [\"Senior\", \"Lead\"],\n    \"remote\": false\n  },\n  \"config\": {\n    \"maxPagesPerSearch\": 10,\n    \"delayBetweenRequests\": 4000\n  }\n}"
+            },
+            "description": "Example configuration for LinkedIn scraping (when implemented)."
+          }
+        },
+        {
+          "name": "Glassdoor Scraping (Future)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/jobs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "jobs"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"boardType\": \"glassdoor\",\n  \"searchParams\": {\n    \"query\": \"UX designer\",\n    \"location\": \"New York\",\n    \"jobType\": [\"Full-time\", \"Contract\"]\n  },\n  \"config\": {\n    \"maxPagesPerSearch\": 8,\n    \"extractCompanyReviews\": true\n  }\n}"
+            },
+            "description": "Example configuration for Glassdoor scraping (when implemented)."
+          }
+        },
+        {
+          "name": "Gulf Region Scraping (Future)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/scraping/jobs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "scraping", "jobs"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"boardType\": \"gulf_talent\",\n  \"searchParams\": {\n    \"query\": \"project manager\",\n    \"location\": \"Dubai\",\n    \"jobType\": [\"Full-time\"],\n    \"level\": [\"Senior\", \"Manager\"]\n  },\n  \"config\": {\n    \"maxPagesPerSearch\": 6,\n    \"delayBetweenRequests\": 2000\n  }\n}"
+            },
+            "description": "Example configuration for Gulf region job boards (when implemented)."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "info": {
+    "name": "RizqAI Admin",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "adminToken", "value": "" },
+    { "key": "jobId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/health" }
+    },
+    {
+      "name": "Auth - Me (admin)",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{adminToken}}" } ],
+        "url": "{{baseUrl}}/api/v1/auth/me"
+      }
+    },
+    {
+      "name": "Scraping - List Scrapers (admin)",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{adminToken}}" } ],
+        "url": "{{baseUrl}}/api/v1/scraping/scrapers"
+      }
+    },
+    {
+      "name": "Scraping - Start (naukri)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n  \"boardType\": \"naukri\",\n  \"searchParams\": { \n    \"query\": \"data scientist\",\n    \"location\": \"Mumbai\" \n  }\n}" },
+        "url": "{{baseUrl}}/api/v1/scraping/jobs"
+      }
+    },
+    {
+      "name": "Scraping - Start (indeed)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n  \"boardType\": \"indeed\",\n  \"searchParams\": { \n    \"query\": \"data scientist\",\n    \"location\": \"New York\" \n  }\n}" },
+        "url": "{{baseUrl}}/api/v1/scraping/jobs"
+      }
+    },
+    {
+      "name": "Scraping - Job Status (admin)",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{adminToken}}" } ],
+        "url": "{{baseUrl}}/api/v1/scraping/jobs/{{jobId}}"
+      }
+    },
+    {
+      "name": "Scraping - Active Jobs (admin)",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{adminToken}}" } ],
+        "url": "{{baseUrl}}/api/v1/scraping/jobs"
+      }
+    },
+    {
+      "name": "Scraping - Health (admin)",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{adminToken}}" } ],
+        "url": "{{baseUrl}}/api/v1/scraping/health"
+      }
+    }
+  ]
+}
+
+

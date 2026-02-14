@@ -1,0 +1,126 @@
+{
+  "info": {
+    "name": "RizqAI Full API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "token", "value": "" },
+    { "key": "jobId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/health" }
+    },
+    {
+      "name": "Auth - Register",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\",\n  \"name\": \"User\"\n}" },
+        "url": "{{baseUrl}}/api/v1/auth/register"
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}" },
+        "url": "{{baseUrl}}/api/v1/auth/login"
+      }
+    },
+    {
+      "name": "Auth - Me",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": "{{baseUrl}}/api/v1/auth/me"
+      }
+    },
+    {
+      "name": "Jobs - List",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": "{{baseUrl}}/api/v1/jobs"
+      }
+    },
+    {
+      "name": "Jobs - Bulk Insert",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"jobs\": [ { \"title\": \"Sample\", \"company\": \"Acme\", \"location\": \"Remote\" } ]\n}" },
+        "url": "{{baseUrl}}/api/v1/jobs"
+      }
+    },
+    {
+      "name": "Jobs - Matches",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": "{{baseUrl}}/api/v1/jobs/matches"
+      }
+    },
+    {
+      "name": "Applications - List",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": "{{baseUrl}}/api/v1/applications"
+      }
+    },
+    {
+      "name": "Applications - Create",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{ \n  \"jobId\": \"<replace>\", \n  \"status\": \"applied\" \n}" },
+        "url": "{{baseUrl}}/api/v1/applications"
+      }
+    },
+    {
+      "name": "Resume - Get My Resume",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/v1/resumes/me" }
+    },
+    {
+      "name": "Resume - Save",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{ \n  \"content\": \"My resume text\" \n}" },
+        "url": "{{baseUrl}}/api/v1/resumes"
+      }
+    },
+    {
+      "name": "AI - Chat",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{ \n  \"system\": \"You are helpful\", \n  \"prompt\": \"Say hi\" \n}" },
+        "url": "{{baseUrl}}/api/v1/ai/chat"
+      }
+    },
+    {
+      "name": "Scraping - Start (naukri)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{ \n  \"boardType\": \"naukri\", \n  \"searchParams\": { \"query\": \"data scientist\" } \n}" },
+        "url": "{{baseUrl}}/api/v1/scraping/jobs"
+      }
+    },
+    {
+      "name": "Scraping - Status",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": "{{baseUrl}}/api/v1/scraping/jobs/{{jobId}}"
+      }
+    }
+  ]
+}
+
+

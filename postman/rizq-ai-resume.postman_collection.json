@@ -1,0 +1,102 @@
+{
+  "info": {
+    "name": "Rizq AI - Resume API",
+    "_postman_id": "d5a8a4b7-1f5c-4e92-9a7c-ef2f1d8b1234",
+    "description": "Postman collection to test AI resume generation, retrieval, and PDF export.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "token", "value": "" },
+    { "key": "resume_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Generate AI Resume",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/resumes/ai-generate",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "resumes", "ai-generate"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"personalInfo\": {\n    \"fullName\": \"Jane Doe\",\n    \"title\": \"Senior Software Engineer\",\n    \"location\": \"Bengaluru, IN\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"+91-90000-00000\",\n    \"summaryPreferences\": \"Emphasize leadership and impact.\"\n  },\n  \"workExperience\": [\n    {\n      \"title\": \"Tech Lead\",\n      \"company\": \"Acme Corp\",\n      \"location\": \"Remote\",\n      \"startDate\": \"2021-02\",\n      \"endDate\": \"Present\",\n      \"responsibilities\": [\"Led a team of 6 engineers\", \"Architected microservices\"],\n      \"achievements\": [\"Reduced latency by 40%\", \"Saved $200k infra costs\"]\n    }\n  ],\n  \"education\": [\n    { \"degree\": \"B.Tech CSE\", \"school\": \"IIT X\", \"graduationDate\": \"2018\" }\n  ],\n  \"skills\": [\"Node.js\", \"TypeScript\", \"AWS\", \"MongoDB\"],\n  \"additionalNotes\": \"Open to relocation.\"\n}"
+        },
+        "description": "Generates a new AI-powered resume. Requires Authorization token."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "try {",
+              "  var data = pm.response.json();",
+              "  if (data && data.resume && data.resume._id) {",
+              "    pm.environment.set('resume_id', data.resume._id);",
+              "  }",
+              "} catch (e) {}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get My Latest Resume",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/resumes/me",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "resumes", "me"]
+        },
+        "description": "Fetches the latest saved resume for the authenticated user."
+      }
+    },
+    {
+      "name": "Export Resume PDF",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/resumes/{{resume_id}}/export",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "resumes", "{{resume_id}}", "export"]
+        },
+        "description": "Exports the resume as a PDF (current generator is a stub). Use Send and Download in Postman."
+      }
+    },
+    {
+      "name": "AI Chat (Smoke Test)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/ai/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "ai", "chat"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"prompt\": \"Say hello in one word\"\n}"
+        },
+        "description": "Simple AI chat endpoint (uses DeepSeek on server)."
+      }
+    }
+  ]
+}
+
+

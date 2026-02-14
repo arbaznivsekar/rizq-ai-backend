@@ -1,0 +1,116 @@
+{
+  "info": {
+    "name": "RIZQ.AI Gmail Email Testing",
+    "description": "Test Gmail email sending functionality",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Check Gmail Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/email-test/status",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "email-test", "status"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. Send Test Email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"your-email@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/email-test/test",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "email-test", "test"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. Send Custom Email (Text)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"your-email@example.com\",\n  \"subject\": \"Test Email from RIZQ.AI\",\n  \"text\": \"This is a test email sent from RIZQ.AI backend system.\\n\\nBest regards,\\nRIZQ.AI Team\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/email-test/send",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "email-test", "send"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4. Send Custom Email (HTML)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"your-email@example.com\",\n  \"subject\": \"Beautiful HTML Email from RIZQ.AI\",\n  \"html\": \"<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;'><h1 style='color: #333;'>Hello from RIZQ.AI!</h1><p style='color: #666; line-height: 1.6;'>This is a beautiful HTML email sent from your RIZQ.AI backend system.</p><div style='background: #f0f8ff; padding: 15px; border-radius: 5px; margin: 20px 0;'><strong>Features:</strong><ul><li>Gmail API Integration</li><li>HTML Email Support</li><li>Automatic Token Refresh</li><li>Professional Templates</li></ul></div><p style='color: #666;'>Best regards,<br>RIZQ.AI Team</p></div>\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/email-test/send",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "email-test", "send"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5. Send Email with CC/BCC",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"primary@example.com\",\n  \"cc\": [\"cc1@example.com\", \"cc2@example.com\"],\n  \"bcc\": [\"bcc@example.com\"],\n  \"subject\": \"Email with CC and BCC\",\n  \"text\": \"This email demonstrates CC and BCC functionality.\",\n  \"replyTo\": \"noreply@rizq.ai\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/email-test/send",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "email-test", "send"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

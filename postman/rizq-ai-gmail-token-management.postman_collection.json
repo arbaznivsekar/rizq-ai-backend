@@ -1,0 +1,472 @@
+{
+  "info": {
+    "name": "RIZQ.AI - Gmail Token Management Testing",
+    "description": "Complete testing collection for Gmail OAuth and token management. Test the entire Gmail integration flow including OAuth, token storage, refresh, and Gmail API functionality.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "gmail-token-management-1234-5678-9abc-def0"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "auth_token", "value": "" },
+    { "key": "user_id", "value": "" },
+    { "key": "gmail_connected", "value": "false" }
+  ],
+  "item": [
+    {
+      "name": "🔐 Authentication Setup",
+      "item": [
+        {
+          "name": "1. Register Test User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"gmail-test@example.com\",\n  \"password\": \"password123\",\n  \"name\": \"Gmail Test User\",\n  \"phone\": \"+1-555-0123\",\n  \"roles\": [\"user\"]\n}"
+            },
+            "description": "Register a new test user for Gmail integration testing."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const response = pm.response.json();",
+                  "  if (response && response.token) {",
+                  "    pm.collectionVariables.set('auth_token', response.token);",
+                  "    pm.collectionVariables.set('user_id', response.user.id);",
+                  "    console.log('✅ User registered successfully!');",
+                  "    console.log('User ID:', response.user.id);",
+                  "    console.log('Email:', response.user.email);",
+                  "  }",
+                  "} else {",
+                  "  console.log('❌ Registration failed:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "2. Login Test User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"gmail-test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "description": "Login with the test user to get authentication token."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const response = pm.response.json();",
+                  "  if (response && response.token) {",
+                  "    pm.collectionVariables.set('auth_token', response.token);",
+                  "    pm.collectionVariables.set('user_id', response.user.id);",
+                  "    console.log('✅ Login successful!');",
+                  "    console.log('User ID:', response.user.id);",
+                  "    console.log('Email:', response.user.email);",
+                  "  }",
+                  "} else {",
+                  "  console.log('❌ Login failed:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "3. Get Current User Info",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "me"]
+            },
+            "description": "Get current user information to verify authentication."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const response = pm.response.json();",
+                  "  console.log('✅ User info retrieved successfully!');",
+                  "  console.log('User:', JSON.stringify(response.user, null, 2));",
+                  "} else {",
+                  "  console.log('❌ Failed to get user info:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "📧 Gmail OAuth Flow",
+      "item": [
+        {
+          "name": "4. Start Gmail OAuth (Browser)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/google/connect",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "google", "connect"]
+            },
+            "description": "🚀 IMPORTANT: Open this in browser to start Gmail OAuth flow. This will redirect to Google OAuth where you need to grant permissions. After granting permissions, you'll be redirected back to your app with a success page."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "console.log('Response Status:', pm.response.code);",
+                  "console.log('Response Headers:', pm.response.headers);",
+                  "if (pm.response.code === 302) {",
+                  "  console.log('✅ Redirecting to Google OAuth');",
+                  "  console.log('Location:', pm.response.headers.get('Location'));",
+                  "  console.log('📝 Next step: Open this URL in your browser to complete OAuth');",
+                  "} else if (pm.response.code === 200) {",
+                  "  console.log('✅ OAuth page loaded');",
+                  "  console.log('📝 Next step: Click the OAuth link in the response');",
+                  "} else {",
+                  "  console.log('❌ Unexpected response:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "5. Gmail OAuth Callback (Manual Test)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/google/callback?code=MANUAL_CODE&state={\"u\":\"{{user_id}}\"}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "google", "callback"],
+              "query": [
+                { 
+                  "key": "code", 
+                  "value": "MANUAL_CODE", 
+                  "description": "Replace with actual code from browser OAuth flow" 
+                },
+                { 
+                  "key": "state", 
+                  "value": "{\"u\":\"{{user_id}}\"}", 
+                  "description": "User ID in state parameter" 
+                }
+              ]
+            },
+            "description": "This endpoint is called automatically by Google after OAuth. You can test it manually with a real code from the browser OAuth flow."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  console.log('✅ OAuth callback successful!');",
+                  "  console.log('Response:', pm.response.text());",
+                  "  pm.collectionVariables.set('gmail_connected', 'true');",
+                  "} else {",
+                  "  console.log('❌ OAuth callback failed:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "📊 Gmail Status & Testing",
+      "item": [
+        {
+          "name": "6. Check Gmail Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/gmail/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "gmail", "status"]
+            },
+            "description": "Check if Gmail is connected and get token status information."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const response = pm.response.json();",
+                  "  console.log('✅ Gmail Status Retrieved:');",
+                  "  console.log(JSON.stringify(response, null, 2));",
+                  "  if (response.data && response.data.connected) {",
+                  "    pm.collectionVariables.set('gmail_connected', 'true');",
+                  "    console.log('🎉 Gmail is connected!');",
+                  "  } else {",
+                  "    console.log('⚠️ Gmail is not connected');",
+                  "  }",
+                  "} else {",
+                  "  console.log('❌ Gmail Status Error:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "7. Test Gmail Connection",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/gmail/test",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "gmail", "test"]
+            },
+            "description": "Test the Gmail connection by making an actual API call to Gmail to verify tokens are working."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const response = pm.response.json();",
+                  "  console.log('✅ Gmail Test Result:');",
+                  "  console.log(JSON.stringify(response, null, 2));",
+                  "  if (response.success) {",
+                  "    console.log('🎉 Gmail API is working perfectly!');",
+                  "    if (response.data) {",
+                  "      console.log('Gmail Email:', response.data.email);",
+                  "      console.log('Messages Total:', response.data.messagesTotal);",
+                  "      console.log('Threads Total:', response.data.threadsTotal);",
+                  "    }",
+                  "  } else {",
+                  "    console.log('⚠️ Gmail test failed:', response.message);",
+                  "  }",
+                  "} else {",
+                  "  console.log('❌ Gmail Test Error:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "8. Disconnect Gmail",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/gmail/disconnect",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "gmail", "disconnect"]
+            },
+            "description": "Disconnect Gmail by removing all stored tokens from the database."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const response = pm.response.json();",
+                  "  console.log('✅ Gmail disconnected successfully!');",
+                  "  console.log('Response:', JSON.stringify(response, null, 2));",
+                  "  pm.collectionVariables.set('gmail_connected', 'false');",
+                  "} else {",
+                  "  console.log('❌ Gmail disconnect failed:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "🔧 Debug & Troubleshooting",
+      "item": [
+        {
+          "name": "9. Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Check if the server is running and healthy."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  console.log('✅ Server is healthy!');",
+                  "  const response = pm.response.json();",
+                  "  console.log('Health Status:', JSON.stringify(response, null, 2));",
+                  "} else {",
+                  "  console.log('❌ Server health check failed:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "10. Test OAuth Start (Debug)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/google/connect",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "google", "connect"]
+            },
+            "description": "Debug version of OAuth start to check redirect and state parameter."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "console.log('🔍 DEBUG - OAuth Start Response:');",
+                  "console.log('Status Code:', pm.response.code);",
+                  "console.log('Response Headers:', pm.response.headers);",
+                  "if (pm.response.code === 302) {",
+                  "  const location = pm.response.headers.get('Location');",
+                  "  console.log('✅ Redirecting to Google OAuth');",
+                  "  console.log('Redirect URL:', location);",
+                  "  if (location && location.includes('state=')) {",
+                  "    const stateMatch = location.match(/state=([^&]+)/);",
+                  "    if (stateMatch) {",
+                  "      try {",
+                  "        const state = decodeURIComponent(stateMatch[1]);",
+                  "        console.log('State Parameter:', state);",
+                  "        const stateData = JSON.parse(state);",
+                  "        console.log('Parsed State:', stateData);",
+                  "        if (stateData.u) {",
+                  "          console.log('✅ User ID found in state:', stateData.u);",
+                  "        } else {",
+                  "          console.log('❌ No user ID in state parameter');",
+                  "        }",
+                  "      } catch (e) {",
+                  "        console.log('❌ Failed to parse state parameter:', e.message);",
+                  "      }",
+                  "    } else {",
+                  "      console.log('❌ No state parameter found in redirect URL');",
+                  "    }",
+                  "  }",
+                  "} else {",
+                  "  console.log('❌ Unexpected response:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "11. Test Without Auth (Should Fail)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/gmail/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "gmail", "status"]
+            },
+            "description": "Test Gmail status without authentication - should return 401 Unauthorized."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 401) {",
+                  "  console.log('✅ Correctly rejected unauthorized request');",
+                  "  const response = pm.response.json();",
+                  "  console.log('Error Response:', JSON.stringify(response, null, 2));",
+                  "} else {",
+                  "  console.log('❌ Expected 401 Unauthorized, got:', pm.response.code);",
+                  "  console.log('Response:', pm.response.text());",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "📋 Testing Instructions",
+      "item": [
+        {
+          "name": "How to Use This Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "📖 READ THIS: Step-by-step instructions for testing Gmail token management.\n\n1. **Start your server**: `npm run dev`\n2. **Run Authentication Setup**: Execute requests 1-3 to create/login user\n3. **Test Gmail OAuth**: Run request 4 and open the URL in browser\n4. **Complete OAuth in browser**: Grant Gmail permissions\n5. **Check Gmail Status**: Run requests 6-7 to verify tokens were saved\n6. **Test Gmail API**: Run request 7 to test actual Gmail functionality\n7. **Clean up**: Run request 8 to disconnect Gmail\n\n**Important Notes:**\n- Make sure your .env has correct Gmail OAuth credentials\n- Check MongoDB to see if Gmail token fields were added\n- Look at server logs for any errors during OAuth callback\n- The OAuth flow requires browser interaction - can't be fully automated"
+          }
+        }
+      ]
+    }
+  ]
+}
