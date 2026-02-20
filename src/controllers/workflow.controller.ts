@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { Types } from 'mongoose';
 import { logger } from '../config/logger.js';
 import { gmailOutreachService } from '../services/gmailOutreachService.js';
+import axios from 'axios';
 import { JobsService } from '../services/JobsService.js';
 import { ServiceRegistry } from '../core/ServiceRegistry.js';
 import { scoreMatch } from '../services/matching.service.js';
@@ -1074,6 +1075,7 @@ export class WorkflowController {
     try {
       const userId = (req as any).user?.id || (req as any).user?._id;
       const { progressId } = req.params;
+      const resumeDownloads = (req.body?.resumeDownloads || {}) as Record<string, string>;
       
       if (!userId) {
         res.status(401).json({ success: false, error: 'Authentication required' });
@@ -1102,19 +1104,47 @@ export class WorkflowController {
         return;
       }
       
-      // Get original request data from progress tracking
-      const { bulkApplicationOrchestrator } = await import('../services/bulkApplicationOrchestrator.service.js');
-      
       // Reconstruct the emailsGenerated array format expected by queueEmailsForSending
       const { JobModel } = await import('../data/models/Job.js');
       const { EmailSendQueue } = await import('../models/emailOutreach.js');
       const { enqueueEmailOutreach } = await import('../queues/emailOutreach.queue.js');
       const { emailRedirectService } = await import('../services/emailRedirectService.js');
       const { Types } = await import('mongoose');
+      const { default: Application } = await import('../models/Application.js');
       
       const results: any[] = [];
       
+      // IDEMPOTENCY: Skip jobs already applied to within the last 30 days
+      const emailJobIds = (previewData.emails || [])
+        .map((e: any) => e.jobId)
+        .filter((id: any) => !!id);
+      
+      let alreadyAppliedJobIds = new Set<string>();
+      if (emailJobIds.length > 0) {
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        
+        const existingApplications = await Application.find({
+          userId: new Types.ObjectId(userId),
+          jobId: { $in: emailJobIds.map((id: string) => new Types.ObjectId(id)) },
+          createdAt: { $gte: thirtyDaysAgo }
+        }).lean();
+        
+        alreadyAppliedJobIds = new Set(
+          existingApplications.map((app: any) => String(app.jobId))
+        );
+      }
+      
       for (const emailData of previewData.emails) {
+        // Skip if user has already applied to this job recently
+        if (emailData.jobId && alreadyAppliedJobIds.has(String(emailData.jobId))) {
+          results.push({
+            jobId: emailData.jobId,
+            status: 'skipped',
+            reason: 'Already applied within the last 30 days'
+          });
+          continue;
+        }
         try {
           const job = await JobModel.findById(emailData.jobId).lean();
           if (!job) {
@@ -1140,6 +1170,35 @@ export class WorkflowController {
             }
           );
           
+          // Prepare attachments array (optionally with resume PDF)
+          const attachments: Array<{ filename: string; content: Buffer }> = [];
+
+          const pdfDownloadUrl = resumeDownloads[emailData.jobId];
+          if (pdfDownloadUrl) {
+            try {
+              const pdfBuffer = await this.downloadPdfAsBuffer(pdfDownloadUrl);
+              if (pdfBuffer) {
+                const safeCompany = companyName.replace(/[^a-zA-Z0-9]/g, '_');
+                const safeTitle = String(emailData.jobTitle || 'Position').replace(/[^a-zA-Z0-9]/g, '_');
+                const filename = `Resume_${safeCompany}_${safeTitle}.pdf`;
+                attachments.push({
+                  filename,
+                  content: pdfBuffer
+                });
+                logger.debug('📎 Resume attachment prepared (preview finalize)', {
+                  jobId: emailData.jobId,
+                  filename,
+                  size: `${(pdfBuffer.length / 1024).toFixed(2)} KB`
+                });
+              }
+            } catch (attachError: any) {
+              logger.warn('⚠️ Failed to download or attach resume PDF for job during finalize', {
+                jobId: emailData.jobId,
+                error: attachError.message
+              });
+            }
+          }
+
           // Create queue record
           const queueDoc = await EmailSendQueue.create({
             userId: new Types.ObjectId(userId),
@@ -1148,7 +1207,7 @@ export class WorkflowController {
             emailContent: {
               subject: emailData.subject,
               body: emailData.body,
-              attachments: []
+              attachments
             },
             status: 'queued',
             scheduledAt: new Date(),
@@ -1190,14 +1249,13 @@ export class WorkflowController {
       await redis.del(key);
       
       // Create application records
-      const { default: Application } = await import('../models/Application.js');
       for (const result of results) {
         if (result.status === 'queued') {
           try {
             await Application.create({
               userId: new Types.ObjectId(userId),
               jobId: new Types.ObjectId(result.jobId),
-              status: 'applied',
+              status: 'Applied',
               emailQueueId: new Types.ObjectId(result.queueId),
               appliedAt: new Date()
             });
@@ -1216,6 +1274,7 @@ export class WorkflowController {
         data: {
           queued: results.filter(r => r.status === 'queued').length,
           failed: results.filter(r => r.status === 'failed').length,
+          skipped: results.filter(r => r.status === 'skipped').length,
           results
         }
       });
@@ -1227,6 +1286,45 @@ export class WorkflowController {
         error: 'Failed to finalize emails',
         details: error.message
       });
+    }
+  }
+
+  /**
+   * Download PDF from gdocify using secure DOC_AUTOMATION credentials
+   * Used to attach user-generated resumes to finalized emails
+   */
+  private async downloadPdfAsBuffer(pdfDownloadUrl: string): Promise<Buffer | null> {
+    try {
+      logger.info('📥 Downloading PDF for email finalize from resume service', {
+        pdfDownloadUrl
+      });
+
+      const response = await axios.get(pdfDownloadUrl, {
+        responseType: 'arraybuffer',
+        timeout: 30000,
+        headers: {
+          Accept: 'application/pdf'
+        }
+      });
+
+      if (response.status === 200 && response.data) {
+        const buffer = Buffer.from(response.data);
+        logger.info('✅ PDF downloaded successfully for finalize', {
+          size: `${(buffer.length / 1024).toFixed(2)} KB`
+        });
+        return buffer;
+      }
+
+      logger.error('❌ Failed to download PDF for finalize', {
+        status: response.status
+      });
+      return null;
+    } catch (error: any) {
+      logger.error('❌ Error downloading PDF for finalize', {
+        error: error.message,
+        pdfDownloadUrl
+      });
+      return null;
     }
   }
 }

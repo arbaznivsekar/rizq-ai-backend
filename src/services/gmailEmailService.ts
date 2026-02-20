@@ -13,9 +13,9 @@ export interface EmailOptions {
   replyTo?: string;
   attachments?: Array<{
     filename: string;
-    content: string;
-    contentType: string;
+    content: Buffer;  // ← CHANGE: string to Buffer
   }>;
+
 }
 
 export interface SendEmailResult {
@@ -72,14 +72,14 @@ class GmailEmailService {
   }
 
   private createEmailMessage(options: EmailOptions): string {
-    const { to, subject, text, html, cc, bcc, replyTo } = options;
+    const { to, subject, text, html, cc, bcc, replyTo, attachments } = options;  // ← ADD: attachments
     
     const headers = [
       `To: ${to}`,
       `Subject: ${subject}`,
       `From: ${replyTo || 'noreply@rizq.ai'}`,
       'MIME-Version: 1.0',
-      'Content-Type: multipart/alternative; boundary="boundary123"'
+      'Content-Type: multipart/mixed; boundary="boundary123"'  // ← CHANGE: multipart/mixed (to support attachments)
     ];
 
     if (cc && cc.length > 0) {
@@ -106,6 +106,20 @@ class GmailEmailService {
     if (html) {
       message += 'Content-Type: text/html; charset=UTF-8\r\n\r\n';
       message += html + '\r\n\r\n';
+    }
+
+    // ← ADD THIS SECTION: Handle attachments
+    if (attachments && attachments.length > 0) {
+      for (const attachment of attachments) {
+        message += '--boundary123\r\n';
+        message += `Content-Type: application/pdf; name="${attachment.filename}"\r\n`;
+        message += `Content-Disposition: attachment; filename="${attachment.filename}"\r\n`;
+        message += 'Content-Transfer-Encoding: base64\r\n\r\n';
+        
+        // Convert Buffer to base64
+        const base64Content = (attachment.content as Buffer).toString('base64');
+        message += base64Content + '\r\n\r\n';
+      }
     }
 
     message += '--boundary123--';

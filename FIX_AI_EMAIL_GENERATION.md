@@ -30,7 +30,7 @@ The OpenRouter API key is invalid or expired:
 
 ```typescript
 // In src/config/env.ts
-OPENROUTER_API_KEY: 
+OPENROUTER_API_KEY:        
 ```
 
 **401 "User not found"** = Authentication failed

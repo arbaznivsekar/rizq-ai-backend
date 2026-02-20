@@ -353,29 +353,7 @@ export class BulkApplicationOrchestratorService {
         generated: emailsGenerated.length
       });
       
-      // PREVIEW MODE: Store emails in Redis instead of queueing
-      if (request.previewMode) {
-        await this.storeEmailPreview(progressId, request.userId, emailsGenerated);
-        
-        await this.updateProgress(progressId, {
-          phase: 'complete',
-          processed: jobsToProcess.length,
-          successful: emailsGenerated.length,
-          failed: 0,
-          skipped: 0,
-          completedAt: new Date(),
-          details: []
-        });
-        
-        logger.info('✅ Email preview stored in Redis', {
-          progressId,
-          count: emailsGenerated.length
-        });
-        
-        return; // Exit early - don't queue or create application records
-      }
-      
-      // Phase 2.5: Generate resumes if jobSummaries are provided
+      //Phase 2.5: Generate resumes if jobSummaries are provided (MOVED BEFORE PREVIEW MODE CHECK)
       let resumeMap: Map<string, { pdfDownloadUrl: string; pdfBuffer: Buffer | null }> = new Map();
       
       if (request.jobSummaries && Object.keys(request.jobSummaries).length > 0) {
@@ -398,6 +376,28 @@ export class BulkApplicationOrchestratorService {
           progressId,
           generated: resumeMap.size
         });
+      }
+      
+      // PREVIEW MODE: Store emails in Redis instead of queueing
+      if (request.previewMode) {
+        await this.storeEmailPreview(progressId, request.userId, emailsGenerated);
+        
+        await this.updateProgress(progressId, {
+          phase: 'complete',
+          processed: jobsToProcess.length,
+          successful: emailsGenerated.length,
+          failed: 0,
+          skipped: 0,
+          completedAt: new Date(),
+          details: []
+        });
+        
+        logger.info('✅ Email preview stored in Redis', {
+          progressId,
+          count: emailsGenerated.length
+        });
+        
+        return; // Exit early - don't queue or create application records
       }
       
       await this.updateProgress(progressId, {

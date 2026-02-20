@@ -85,7 +85,10 @@ Guidelines:
 - Express enthusiasm authentically
 - End with a clear next step
 - Keep tone appropriate for the recipient role (recruiter vs hiring manager)
-- NO clichés or overused phrases`;
+- NO clichés or overused phrases
+- IMPORTANT: Do NOT include any closing salutation like "Best regards", "Sincerely", "Regards", etc.
+- IMPORTANT: Do NOT include sender name or email address in the body
+- The body should end with a final statement or call-to-action, nothing more`;
   }
   
   /**
@@ -178,21 +181,35 @@ Guidelines:
   /**
    * Add signature and compliance footer
    */
-  private addSignatureAndCompliance(body: string, input: EmailGenerationInput): string {
-    const unsubscribeUrl = `${process.env.APP_BASE_URL || 'https://app.rizq.ai'}/unsubscribe`;
-    
-    const parts = [
-      body.trim(),
-      '',
-      'Best regards,',
-      input.userProfile.name,
-      input.userProfile.email,
-      ''
-    ];
-    
-    return parts.join('\n');
-  }
-  
+    /**
+   * Add signature and compliance footer
+   */
+    private addSignatureAndCompliance(body: string, input: EmailGenerationInput): string {
+      // Clean up the body - remove any existing "Best regards" or similar closings that the LLM might have added
+      let cleanBody = body.trim();
+      const closingPatterns = [
+        /\nBest regards[,.]?\n?/gi,
+        /\nSincerely[,.]?\n?/gi,
+        /\nRegards[,.]?\n?/gi,
+        /\nKind regards[,.]?\n?/gi,
+        /\nThank you[,.]?\n?/gi,
+      ];
+      
+      closingPatterns.forEach(pattern => {
+        cleanBody = cleanBody.replace(pattern, '\n');
+      });
+      
+      const parts = [
+        cleanBody,
+        '',
+        'Best regards,',
+        input.userProfile.name,
+        input.userProfile.email,
+        ''
+      ];
+      
+      return parts.join('\n');
+    }
   /**
    * Generate fallback subject line
    */
