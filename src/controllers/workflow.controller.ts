@@ -1076,6 +1076,9 @@ export class WorkflowController {
       const userId = (req as any).user?.id || (req as any).user?._id;
       const { progressId } = req.params;
       const resumeDownloads = (req.body?.resumeDownloads || {}) as Record<string, string>;
+      const selectedJobIds = Array.isArray((req.body as any)?.jobIds)
+        ? (req.body as any).jobIds.map((id: any) => String(id))
+        : undefined;
       
       if (!userId) {
         res.status(401).json({ success: false, error: 'Authentication required' });
@@ -1136,8 +1139,19 @@ export class WorkflowController {
       }
       
       for (const emailData of previewData.emails) {
+        const jobIdStr = String(emailData.jobId);
+        // If the client sent an explicit list of jobIds to finalize,
+        // skip any emails that are not in that list.
+        if (selectedJobIds && !selectedJobIds.includes(jobIdStr)) {
+          results.push({
+            jobId: emailData.jobId,
+            status: 'skipped',
+            reason: 'Removed by user before sending',
+          });
+          continue;
+        }
         // Skip if user has already applied to this job recently
-        if (emailData.jobId && alreadyAppliedJobIds.has(String(emailData.jobId))) {
+        if (emailData.jobId && alreadyAppliedJobIds.has(jobIdStr)) {
           results.push({
             jobId: emailData.jobId,
             status: 'skipped',
