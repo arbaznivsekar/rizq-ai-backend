@@ -41,39 +41,36 @@ app.use("/api/v1", routes);
 //  const simpleErrorRoutes = await import('../test/routes/simpleErrorRoutes.js');
 // app.use("/api/v1/test", simpleErrorRoutes.default);
 //}
-
-// Initialize services
+// Initialize services (will be called from server.ts)
 let serviceRegistry: any = null;
-try {
-  serviceRegistry = await initializeServices();
-  console.log('✅ Services initialized successfully');
-} catch (error) {
-  console.error('❌ Failed to initialize services:', error);
-  process.exit(1);
+
+export async function initializeApp() {
+  try {
+    serviceRegistry = await initializeServices();
+    console.log('✅ Services initialized successfully');
+    return app;
+  } catch (error) {
+    console.error('❌ Failed to initialize services:', error);
+    throw error;
+  }
 }
 
 // Graceful shutdown
-process.on('SIGTERM', async () => {
-  console.log('Received SIGTERM, shutting down gracefully...');
+export async function shutdownApp() {
+  console.log('Shutting down gracefully...');
   if (serviceRegistry) {
     await shutdownServices();
   }
+}
+
+process.on('SIGTERM', async () => {
+  await shutdownApp();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
-  console.log('Received SIGINT, shutting down gracefully...');
-  if (serviceRegistry) {
-    await shutdownServices();
-  }
+  await shutdownApp();
   process.exit(0);
 });
-
-// Errors
-app.use(errorMiddleware);
-
-// Global error handlers
-process.on('unhandledRejection', handleUnhandledRejection);
-process.on('uncaughtException', handleUncaughtException);
 
 export default app;

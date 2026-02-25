@@ -14,6 +14,9 @@ import { JobsService } from '../services/JobsService.js';
 import { ServiceRegistry } from '../core/ServiceRegistry.js';
 import { scoreMatch } from '../services/matching.service.js';
 import { getLatestResume } from '../services/resume.service.js';
+import Application from '../models/Application.js';
+import User from '../models/User.js';
+import { JobModel } from '../data/models/Job.js';
 
 /**
  * Input validation schemas
@@ -451,7 +454,6 @@ export class WorkflowController {
       thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
       // Find applications for these jobs
-      const { default: Application } = await import('../models/Application.js');
       const applications = await Application.find({
         userId: new Types.ObjectId(userId),
         jobId: { $in: jobIdArray.map(id => new Types.ObjectId(id)) }
@@ -611,8 +613,6 @@ export class WorkflowController {
         return;
       }
 
-      const Application = (await import('../models/Application.js')).default;
-      const { Types } = await import('mongoose');
 
       // Get recent jobs
       const recentJobs = await this.getJobsService().getRecentJobs(10);
@@ -674,9 +674,6 @@ export class WorkflowController {
    * Get application statistics for user
    */
   private async getApplicationStats(userId: string): Promise<any> {
-    const Application = (await import('../models/Application.js')).default;
-    const { Types } = await import('mongoose');
-    
     const now = new Date();
     const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
     const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
@@ -1002,7 +999,7 @@ export class WorkflowController {
       const emailToRegenerate = previewData.emails[index];
       
       // Fetch user and job data
-      const User = (await import('../models/User.js')).default;
+
       const user = await User.findById(userId).lean();
       if (!user) {
         res.status(404).json({ success: false, error: 'User not found' });
@@ -1113,7 +1110,6 @@ export class WorkflowController {
       const { enqueueEmailOutreach } = await import('../queues/emailOutreach.queue.js');
       const { emailRedirectService } = await import('../services/emailRedirectService.js');
       const { Types } = await import('mongoose');
-      const { default: Application } = await import('../models/Application.js');
       
       const results: any[] = [];
       

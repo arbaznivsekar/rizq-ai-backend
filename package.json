@@ -1,8 +1,6 @@
 {
   "name": "rizq-ai-backend",
   "version": "1.0.0",
-  "type": "module",
-  "main": "dist/src/server.js",
   "scripts": {
     "dev": "nodemon",
     "build": "tsc -p tsconfig.json",
