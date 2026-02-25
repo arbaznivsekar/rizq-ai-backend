@@ -38,8 +38,8 @@ app.use("/api/v1", routes);
 
 // Test routes (temporarily enabled for testing)
 //if (process.env.NODE_ENV === 'test' || process.env.VITEST === 'true' || process.env.ENABLE_TEST_ROUTES === 'true') {
-  const simpleErrorRoutes = await import('../test/routes/simpleErrorRoutes.js');
-  app.use("/api/v1/test", simpleErrorRoutes.default);
+//  const simpleErrorRoutes = await import('../test/routes/simpleErrorRoutes.js');
+// app.use("/api/v1/test", simpleErrorRoutes.default);
 //}
 
 // Initialize services
