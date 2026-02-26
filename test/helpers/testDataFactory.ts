@@ -30,11 +30,16 @@ export class TestDataFactory {
   static async createAuthenticatedUser(overrides: any = {}) {
     const user = await this.createUser(overrides);
     const token = jwt.sign(
-      { id: user._id, email: user.email },
-      env.NEXTAUTH_SECRET,
+      {
+        sub: user._id.toString(),
+        email: user.email,
+        name: user.name ?? '',
+        roles: user.roles ?? ['user']
+      },
+      env.JWT_SECRET,
       { expiresIn: '1h', issuer: env.JWT_ISSUER, audience: env.JWT_AUDIENCE }
     );
-    
+
     return { user, token };
   }
   

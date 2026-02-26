@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import { env } from '../config/env.js';
 import User from '../models/User.js';
 import { logger } from '../config/logger.js';
+import { createAccessAndRefreshTokens } from '../auth/tokenService.js';
 
 function assertGmailEnv() {
   if (!env.GMAIL_CLIENT_ID || !env.GMAIL_CLIENT_SECRET || !env.GMAIL_REDIRECT_URI) {
@@ -56,8 +56,8 @@ export async function googleCallback(req: Request, res: Response) {
     console.log('🔄 Exchanging code for tokens...');
     const { tokens } = await oauth2.getToken(code);
     console.log('✅ Tokens received successfully');
-    const refreshToken = tokens.refresh_token;
-    const accessToken = tokens.access_token;
+    const gmailRefreshToken = tokens.refresh_token;
+    const gmailAccessToken = tokens.access_token;
 
     // Get user profile information
     let email: string | undefined;
@@ -65,8 +65,8 @@ export async function googleCallback(req: Request, res: Response) {
     let profilePicture: string | undefined;
     
     try {
-      if (accessToken) {
-        oauth2.setCredentials({ access_token: accessToken });
+      if (gmailAccessToken) {
+        oauth2.setCredentials({ access_token: gmailAccessToken });
         // @ts-ignore
         const oauth2api = google.oauth2({ version: 'v2', auth: oauth2 });
         const profile = await oauth2api.userinfo.get();
@@ -96,8 +96,8 @@ export async function googleCallback(req: Request, res: Response) {
     
     if (user) {
       // Update existing user with Gmail tokens
-      user.gmailRefreshToken = refreshToken || undefined;
-      user.gmailAccessToken = accessToken || undefined;
+      user.gmailRefreshToken = gmailRefreshToken || undefined;
+      user.gmailAccessToken = gmailAccessToken || undefined;
       user.gmailTokenExpiry = tokenExpiry;
       user.gmailConnectedAt = new Date();
       user.updatedAt = new Date();
@@ -111,8 +111,8 @@ export async function googleCallback(req: Request, res: Response) {
       user = new User({
         email,
         name: name || email.split('@')[0],
-        gmailRefreshToken: refreshToken,
-        gmailAccessToken: accessToken,
+        gmailRefreshToken: gmailRefreshToken,
+        gmailAccessToken: gmailAccessToken,
         gmailTokenExpiry: tokenExpiry,
         gmailConnectedAt: new Date(),
         image: profilePicture,
@@ -124,39 +124,29 @@ export async function googleCallback(req: Request, res: Response) {
       await user.save();
       console.log('✅ Created new user:', user._id);
     }
-    
-    // Generate JWT token for the user
-    const jwtToken = jwt.sign(
-      { 
-        sub: user._id.toString(), 
-        email: user.email,
-        name: user.name,
-        roles: user.roles 
-      },
-      env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
-    
+
+    const authTokens = await createAccessAndRefreshTokens({
+      sub: user._id.toString(),
+      email: user.email,
+      name: user.name ?? "",
+      roles: user.roles
+    });
+
     console.log('🎉 User authenticated successfully!');
-    
-    logger.info(`User authenticated via Gmail OAuth`, { 
+
+    logger.info(`User authenticated via Gmail OAuth`, {
       userId: user._id,
       email: user.email,
       isNewUser: !user.gmailConnectedAt || (user.createdAt && user.gmailConnectedAt.getTime() === user.createdAt.getTime())
     });
 
-    // Set HttpOnly cookie for session and redirect to frontend
     const frontendUrl = env.CORS_ORIGIN || 'http://localhost:3000';
-    res.cookie('token', jwtToken, {
-      httpOnly: true,
-      secure: (env.NODE_ENV === 'production'),
-      sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      path: '/',
-    });
-
-    // Redirect to dashboard after successful authentication
-    const redirectUrl = `${frontendUrl}/dashboard`;
+    const hash = new URLSearchParams({
+      accessToken: authTokens.accessToken,
+      refreshToken: authTokens.refreshToken,
+      expiresIn: String(authTokens.expiresIn)
+    }).toString();
+    const redirectUrl = `${frontendUrl}/auth/callback#${hash}`;
     return res.redirect(redirectUrl);
     
   } catch (e: any) {

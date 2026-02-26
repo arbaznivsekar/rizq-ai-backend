@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { me, logout } from "../controllers/auth.controller.js";
+import { me, logout, refresh, login, register } from "../controllers/auth.controller.js";
 import { googleConnect, googleCallback } from "../controllers/googleOAuth.controller.js";
 import { getGmailStatus, disconnectGmail } from "../controllers/gmailStatus.controller.js";
 import { testGmailConnection } from "../controllers/gmailTest.controller.js";
@@ -10,6 +10,13 @@ const r = Router();
 // Gmail OAuth Authentication (Primary authentication method)
 r.get("/google/login", googleConnect); // Gmail OAuth login
 r.get("/google/callback", googleCallback); // Gmail OAuth callback
+
+// Email/password auth (public)
+r.post("/login", login);
+r.post("/register", register);
+
+// Refresh token (public; accepts refresh token in body)
+r.post("/refresh", refresh);
 
 // Protected routes (authentication required)
 r.get("/me", requireAuth, me);
