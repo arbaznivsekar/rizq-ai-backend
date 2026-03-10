@@ -132,7 +132,19 @@ export class GmailOutreachService {
         }
       });
 
-      await enqueueEmailOutreach({ queueId: String(queueDoc._id) });
+      const enqueueResult = await enqueueEmailOutreach({ queueId: String(queueDoc._id) });
+      if (enqueueResult.skipped) {
+        queueDoc.status = 'failed';
+        queueDoc.error = 'queue_not_initialized';
+        await queueDoc.save();
+        logger.error('Email outreach enqueue skipped (Redis/queue not initialized)', {
+          queueId: String(queueDoc._id),
+          jobId: app.jobId,
+          userId,
+        });
+        continue;
+      }
+
       queued += 1;
     }
 

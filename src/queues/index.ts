@@ -14,22 +14,56 @@
       logger.warn("Redis not configured; skipping BullMQ queues/workers initialization");
       return;
     }
+
     bulkApplyQueue = new Queue("bulk-apply", { connection });
     matchingQueue = new Queue("matching", { connection });
     scrapingQueue = new Queue("scraping", { connection });
     emailOutreachQueue = new Queue("email-outreach", { connection });
     const emailDiscoveryQueue = new Queue("email-discovery", { connection });
-    // Workers (can be split into separate processes/containers)
-    // eslint-disable-next-line no-new
-    // new Worker("bulk-apply", (await import("../workers/bulkApply.worker.js")).default, { connection });
-    // // eslint-disable-next-line no-new
-    // new Worker("matching", (await import("../workers/matching.worker.js")).default, { connection });
-    // // eslint-disable-next-line no-new
-    // new Worker("scraping", (await import("../workers/scraping.worker.js")).default, { connection });
-    // // eslint-disable-next-line no-new
-    // new Worker("email-discovery", (await import("../workers/emailDiscovery.worker.js")).default as any, { connection });
-    // // eslint-disable-next-line no-new
-    // new Worker("email-outreach", (await import("../workers/emailOutreach.worker.js")).default as any, { connection });
+
+    // Workers (can be split into separate processes/containers).
+    // For now we run the email outreach worker in-process so queued
+    // recruiter emails are actually sent in all environments.
+    const emailOutreachWorker = new Worker(
+      "email-outreach",
+      (await import("../workers/emailOutreach.worker.js")).default as any,
+      { connection }
+    );
+
+    // Detailed worker lifecycle logging to debug crashes and failures
+    emailOutreachWorker.on("completed", (job) => {
+      logger.info("📨 Email outreach job completed", {
+        queue: "email-outreach",
+        jobId: job.id,
+        queueId: (job.data as any)?.queueId,
+      });
+    });
+
+    emailOutreachWorker.on("failed", (job, err) => {
+      logger.error("❌ Email outreach job failed", {
+        queue: "email-outreach",
+        jobId: job?.id,
+        queueId: job?.data?.queueId,
+        error: err?.message,
+        stack: err?.stack,
+      });
+    });
+
+    emailOutreachWorker.on("error", (err) => {
+      logger.error("🔥 Email outreach worker error (possible crash)", {
+        queue: "email-outreach",
+        error: err?.message,
+        stack: err?.stack,
+      });
+    });
+
+    emailOutreachWorker.on("stalled", (jobId) => {
+      logger.warn("⚠️ Email outreach job stalled", {
+        queue: "email-outreach",
+        jobId,
+      });
+    });
+
     logger.info("Queues and workers initialized");
   }
 

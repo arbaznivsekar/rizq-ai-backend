@@ -517,6 +517,7 @@ export class WorkflowController {
 
       res.json({
         success: true,
+        
         data: statusMap
       });
 
@@ -1231,7 +1232,13 @@ export class WorkflowController {
           });
           
           // Enqueue for async processing
-          await enqueueEmailOutreach({ queueId: String(queueDoc._id) });
+          const enqueueResult = await enqueueEmailOutreach({ queueId: String(queueDoc._id) });
+          if (enqueueResult.skipped) {
+            queueDoc.status = 'failed';
+            queueDoc.error = 'queue_not_initialized';
+            await queueDoc.save();
+            throw new Error('Email outreach queue is not initialized (Redis not connected)');
+          }
           
           results.push({
             jobId: emailData.jobId,

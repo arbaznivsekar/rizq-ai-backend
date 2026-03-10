@@ -20,6 +20,11 @@ import { logger } from "./config/logger.js";
   app.listen(env.PORT, () => {
     logger.info(`🚀 API listening on http://localhost:${env.PORT}`);
     logger.info(`📍 Environment: ${env.NODE_ENV}`);
+    logger.info('Runtime capability check', {
+      redisEnabled: !!env.REDIS_URL,
+      gmailOAuthConfigured: !!(env.GMAIL_CLIENT_ID && env.GMAIL_CLIENT_SECRET && env.GMAIL_REDIRECT_URI),
+      emailTestMode: env.EMAIL_TEST_MODE === 'true',
+    });
   });
 })().catch((err) => {
   // eslint-disable-next-line no-console
