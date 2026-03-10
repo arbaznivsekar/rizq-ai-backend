@@ -24,12 +24,45 @@
     // Workers (can be split into separate processes/containers).
     // For now we run the email outreach worker in-process so queued
     // recruiter emails are actually sent in all environments.
-    // eslint-disable-next-line no-new
-    new Worker(
+    const emailOutreachWorker = new Worker(
       "email-outreach",
       (await import("../workers/emailOutreach.worker.js")).default as any,
       { connection }
     );
+
+    // Detailed worker lifecycle logging to debug crashes and failures
+    emailOutreachWorker.on("completed", (job) => {
+      logger.info("📨 Email outreach job completed", {
+        queue: "email-outreach",
+        jobId: job.id,
+        queueId: (job.data as any)?.queueId,
+      });
+    });
+
+    emailOutreachWorker.on("failed", (job, err) => {
+      logger.error("❌ Email outreach job failed", {
+        queue: "email-outreach",
+        jobId: job?.id,
+        queueId: job?.data?.queueId,
+        error: err?.message,
+        stack: err?.stack,
+      });
+    });
+
+    emailOutreachWorker.on("error", (err) => {
+      logger.error("🔥 Email outreach worker error (possible crash)", {
+        queue: "email-outreach",
+        error: err?.message,
+        stack: err?.stack,
+      });
+    });
+
+    emailOutreachWorker.on("stalled", (jobId) => {
+      logger.warn("⚠️ Email outreach job stalled", {
+        queue: "email-outreach",
+        jobId,
+      });
+    });
 
     logger.info("Queues and workers initialized");
   }

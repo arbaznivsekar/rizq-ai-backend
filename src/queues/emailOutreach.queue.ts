@@ -3,8 +3,10 @@ import { logger } from '../config/logger.js';
 
 export async function enqueueEmailOutreach(payload: { queueId: string }) {
   if (!emailOutreachQueue) {
-    logger.warn('Email outreach queue is not initialized (Redis not connected). Skipping enqueue.');
-    return { id: null };
+    logger.warn('Email outreach queue is not initialized (Redis not connected). Skipping enqueue.', {
+      queueId: payload.queueId,
+    });
+    return { id: null as string | null, skipped: true as const };
   }
   const job = await emailOutreachQueue.add('send-email', payload, {
     attempts: 3,
@@ -12,7 +14,7 @@ export async function enqueueEmailOutreach(payload: { queueId: string }) {
     removeOnComplete: 1000,
     removeOnFail: 1000,
   });
-  return { id: job.id };
+  return { id: job.id, skipped: false as const };
 }
 
 

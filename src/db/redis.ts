@@ -6,8 +6,8 @@ export let redis: any = null;
 
 export async function connectRedis() {
   try {
-    if (!env.REDIS_URL || env.REDIS_URL === 'redis://localhost:6379') {
-      logger.warn("REDIS_URL not set please set it in the .env file; Redis disabled");
+    if (!env.REDIS_URL) {
+      logger.warn("REDIS_URL not set; Redis disabled (queues/email sending will not run)");
       return;
     }
     // Use the configured REDIS_URL; avoid hardcoded hosts
