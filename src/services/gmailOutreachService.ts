@@ -8,6 +8,7 @@ import { HunterIOService } from './hunterio.service.js';
 import { enqueueEmailOutreach } from '../queues/emailOutreach.queue.js';
 import { gmailTokenService } from './gmailTokenService.js';
 import { emailRedirectService } from './emailRedirectService.js';
+import { gmailEmailService } from './gmailEmailService.js';
 
 type ApplicationInput = { jobId: string };
 
@@ -178,40 +179,6 @@ export class GmailOutreachService {
     return { subject, body };
   }
 
-  private async createTransportForUser(user: any) {
-    const userId = String(user._id);
-    const emailAddress = (user as any)?.email;
-    
-    if (!emailAddress) {
-      const err = new Error('Missing email for user');
-      (err as any).code = 'MISSING_EMAIL';
-      throw err;
-    }
-
-    // Get valid access token using our token service
-    const accessToken = await gmailTokenService.getValidAccessToken(userId);
-    if (!accessToken) {
-      const err = new Error('Gmail not connected or token refresh failed');
-      (err as any).code = 'GMAIL_NOT_CONNECTED';
-      throw err;
-    }
-
-    // @ts-ignore - ambient types provided or runtime dependency present
-    const nodemailerMod: any = await import('nodemailer');
-    const transport = nodemailerMod.default.createTransport({
-      service: 'gmail',
-      auth: {
-        type: 'OAuth2',
-        user: emailAddress,
-        clientId: process.env.GMAIL_CLIENT_ID,
-        clientSecret: process.env.GMAIL_CLIENT_SECRET,
-        refreshToken: user.gmailRefreshToken,
-        accessToken: accessToken
-      }
-    });
-    return transport;
-  }
-
   async processQueueItem(payload: { queueId?: string }) {
     if (!payload?.queueId) return;
     const queueDoc = await EmailSendQueue.findById(payload.queueId);
@@ -230,34 +197,41 @@ export class GmailOutreachService {
       return;
     }
 
-    await this.rateLimiter.wait(String(queueDoc.userId));
+    const userIdStr = String(queueDoc.userId);
+    await this.rateLimiter.wait(userIdStr);
 
     try {
-      const transport = await this.createTransportForUser(user);
-      
-      // Prepare email options with attachments
-      const mailOptions: any = {
-        from: (user as any).email,
-        to: queueDoc.recipientEmail,
-        subject: queueDoc.emailContent.subject,
-        text: queueDoc.emailContent.body
-      };
-      
-      // Add attachments if present
-      if (queueDoc.emailContent.attachments && queueDoc.emailContent.attachments.length > 0) {
-        mailOptions.attachments = queueDoc.emailContent.attachments.map((att: any) => ({
-          filename: att.filename,
-          content: att.content
-        }));
-        
-        logger.info('📎 Sending email with attachments', {
+      // Map queue document into GmailEmailService options
+      const attachments =
+        queueDoc.emailContent.attachments && queueDoc.emailContent.attachments.length > 0
+          ? queueDoc.emailContent.attachments.map((att: any) => ({
+              filename: att.filename,
+              // Stored as Binary in Mongo; convert to Buffer for Gmail API
+              content: Buffer.isBuffer(att.content)
+                ? (att.content as Buffer)
+                : Buffer.from((att.content as any)?.buffer || att.content),
+            }))
+          : undefined;
+
+      if (attachments && attachments.length > 0) {
+        logger.info('📎 Sending email with attachments via Gmail API', {
           queueId: String(queueDoc._id),
-          attachmentCount: mailOptions.attachments.length,
-          attachmentNames: mailOptions.attachments.map((a: any) => a.filename)
+          attachmentCount: attachments.length,
+          attachmentNames: attachments.map((a: any) => a.filename),
         });
       }
-      
-      await transport.sendMail(mailOptions);
+
+      const result = await gmailEmailService.sendEmail(userIdStr, {
+        to: queueDoc.recipientEmail,
+        subject: queueDoc.emailContent.subject,
+        text: queueDoc.emailContent.body,
+        attachments,
+      });
+
+      if (!result.success) {
+        throw new Error(result.error || 'gmail_api_send_failed');
+      }
+
       queueDoc.status = 'sent';
       queueDoc.sentAt = new Date();
       await queueDoc.save();
